@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg0a7o7n6iwxa"]
+[gd_scene load_steps=7 format=3 uid="uid://bg0a7o7n6iwxa"]
 
 [ext_resource type="PackedScene" uid="uid://dbk5d5v6rtniy" path="res://scenes/player.tscn" id="1_baenq"]
-[ext_resource type="Script" path="res://scripts/player_camera.gd" id="2_a1575"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dk7vj"]
 size = Vector3(20, 0.5, 20)
@@ -21,8 +20,6 @@ background_mode = 2
 sky = SubResource("Sky_4jemo")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_mgx3u"]
 
 [node name="Main" type="Node"]
 
@@ -44,18 +41,4 @@ environment = SubResource("Environment_vfrhk")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0.25, 0)
 shadow_enabled = true
 
-[node name="Player" parent="Node3D" node_paths=PackedStringArray("_camera") instance=ExtResource("1_baenq")]
-_camera = NodePath("../PlayerCameraPivot/SpringArm3D/PlayerCamera")
-
-[node name="PlayerCameraPivot" type="Node3D" parent="Node3D"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51885, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="Node3D/PlayerCameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.51885, 0)
-shape = SubResource("SphereShape3D_mgx3u")
-spring_length = 8.5
-
-[node name="PlayerCamera" type="Camera3D" parent="Node3D/PlayerCameraPivot/SpringArm3D" node_paths=PackedStringArray("player")]
-script = ExtResource("2_a1575")
-player = NodePath("../../../Player")
+[node name="Player" parent="Node3D" instance=ExtResource("1_baenq")]

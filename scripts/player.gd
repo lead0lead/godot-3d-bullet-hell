@@ -8,9 +8,7 @@ extends CharacterBody3D
 @export_group("Skin")
 @export var _skin: MeshInstance3D
 
-@export_group("Camera")
-@export var _camera: Camera3D
-
+@onready var _camera: Camera3D = %PlayerCamera
 var _last_move_direction := Vector3.FORWARD
 var _gravity := -50
 
