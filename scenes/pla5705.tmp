@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbk5d5v6rtniy"]
+[gd_scene load_steps=10 format=3 uid="uid://dbk5d5v6rtniy"]
 
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
 
@@ -18,6 +19,8 @@ height = 1.0
 size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin")]
 script = ExtResource("1_yjuw3")
@@ -40,6 +43,18 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4rsci")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51885, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+shape = SubResource("SphereShape3D_7xni4")
+spring_length = 8.5
+
+[node name="PlayerCamera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+unique_name_in_owner = true
+script = ExtResource("1_3o8u8")
 
 [node name="TestInput" type="Node" parent="."]
 script = ExtResource("2_mmey0")
