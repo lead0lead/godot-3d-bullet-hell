@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbk5d5v6rtniy"]
+[gd_scene load_steps=10 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -46,9 +46,10 @@ shape = SubResource("CapsuleShape3D_4rsci")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51885, 0)
+top_level = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_7xni4")
 spring_length = 7.0
 
