@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 	if vector_to_player.length() > max_cam_distance:
 		_camera_pivot.position = (_player.position 
-			- vector_to_player.normalized() 
+			- vector_to_player.normalized()
 			* max_cam_distance)
 	else:
 		_camera_pivot.position = lerp(_camera_pivot.position,

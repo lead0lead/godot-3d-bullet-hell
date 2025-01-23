@@ -23,6 +23,7 @@ size = Vector3(0.5, 0.5, 0.25)
 [sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin")]
+collision_layer = 2
 script = ExtResource("1_yjuw3")
 _skin = NodePath("TestMesh")
 
