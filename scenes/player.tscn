@@ -1,10 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbk5d5v6rtniy"]
+[gd_scene load_steps=10 format=3 uid="uid://dbk5d5v6rtniy"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
+albedo_color = Color(0.827151, 0, 0.217989, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1kp56"]
+material = SubResource("StandardMaterial3D_n7vr8")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gg0yc"]
+material = SubResource("StandardMaterial3D_n7vr8")
+radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_68f3k"]
+size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
 
@@ -17,6 +29,16 @@ _skin = NodePath("TestMesh")
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_1kp56")
+
+[node name="TestMesh3" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.484896)
+mesh = SubResource("CapsuleMesh_gg0yc")
+skeleton = NodePath("../..")
+
+[node name="TestMesh2" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.466534, -0.432712)
+mesh = SubResource("BoxMesh_68f3k")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

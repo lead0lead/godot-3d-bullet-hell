@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.y = y_velocity + _gravity * delta
 	
-	if Input.is_action_just_pressed("fly") and is_on_floor():
+	if Input.is_action_pressed("fly"):
 		velocity.y = flight_impulse
 	
 	move_and_slide()
