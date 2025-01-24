@@ -2,7 +2,11 @@ extends Camera3D
 
 @export_range(0.0, 0.1) var camera_sensitivity := 0.0025
 
-@export var max_cam_distance := 5.0
+@export var max_cam_x_distance := 12.0
+@export var max_cam_y_distance := 4.0
+@export var max_cam_z_distance := 1.0
+
+@export var camera_speed := 0.01
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _player := _camera_pivot.get_parent()
@@ -30,22 +34,44 @@ func _physics_process(delta: float) -> void:
 	
 	# handle camera positon
 	
-	var vector_to_player: Vector3 = (_player.global_position - 
-		_camera_pivot.global_position)
-	
-	if vector_to_player.length() > max_cam_distance:
-		_camera_pivot.position = (_player.position 
-			- vector_to_player.normalized()
-			* max_cam_distance)
-	else:
-		_camera_pivot.position = lerp(_camera_pivot.position,
-			 _player.position, 0.05)
-	
 	var vector_from_player: Vector3 = (_camera_pivot.position 
 		- _player.position)
+	
+	var local_x_offset = (_camera_pivot.global_basis.x 
+		* vector_from_player.dot(_camera_pivot.global_basis.x))
+		
+	var local_y_offset = (_camera_pivot.global_basis.y 
+		* vector_from_player.dot(_camera_pivot.global_basis.y))
 		
 	var local_z_offset = (_camera_pivot.global_basis.z 
 		* vector_from_player.dot(_camera_pivot.global_basis.z))
 		
-	if local_z_offset.length() > 0:
-		_camera_pivot.position = _camera_pivot.position - local_z_offset
+	var x_offset_from_max = (local_x_offset.normalized() 
+		* (local_x_offset.length() 
+		- max_cam_x_distance))
+		
+	var y_offset_from_max = (local_y_offset.normalized() 
+		* (local_y_offset.length() 
+		- max_cam_y_distance))
+		
+	var z_offset_from_max = (local_z_offset.normalized() 
+		* (local_z_offset.length() 
+		- max_cam_z_distance))
+		
+	if local_x_offset.length() > max_cam_x_distance:
+		_camera_pivot.position = (_camera_pivot.position - x_offset_from_max)
+	else:
+		_camera_pivot.position = lerp(_camera_pivot.position,
+			 _player.position, camera_speed)
+
+	if local_y_offset.length() > max_cam_y_distance:
+		_camera_pivot.position = (_camera_pivot.position - y_offset_from_max)
+	else:
+		_camera_pivot.position = lerp(_camera_pivot.position,
+			 _player.position, camera_speed)
+
+	if local_z_offset.length() > max_cam_z_distance:
+		_camera_pivot.position = (_camera_pivot.position - z_offset_from_max)
+	else:
+		_camera_pivot.position = lerp(_camera_pivot.position,
+			 _player.position, camera_speed)
