@@ -4,7 +4,7 @@ extends Camera3D
 
 @export var max_cam_x_distance := 12.0
 @export var max_cam_y_distance := 4.0
-@export var max_cam_z_distance := 1.0
+@export var max_cam_z_distance := 0.5
 
 @export var camera_speed := 0.01
 

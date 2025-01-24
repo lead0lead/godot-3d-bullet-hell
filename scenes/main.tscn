@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://wtup6u4wgkew" path="res://scenes/player.tscn" id="1_baenq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dk7vj"]
-size = Vector3(20, 0.5, 20)
+size = Vector3(100, 0.5, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cjkpx"]
-size = Vector3(20, 0.5, 20)
+size = Vector3(100, 0.5, 100)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gc67x"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,5 +40,43 @@ environment = SubResource("Environment_vfrhk")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/TestLevel"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0.25, 0)
 shadow_enabled = true
+
+[node name="TestLevel2" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(0.829116, 0.559077, 0, -0.559077, 0.829116, 0, 0, 0, 1, 0, -0.25, -104.684)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel2"]
+mesh = SubResource("BoxMesh_dk7vj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel2"]
+shape = SubResource("BoxShape3D_cjkpx")
+
+[node name="TestLevel4" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(0.997574, 0.0696172, 0, -0.0696172, 0.997574, 0, 0, 0, 1, 79.8697, -40.3321, -104.684)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel4"]
+mesh = SubResource("BoxMesh_dk7vj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel4"]
+shape = SubResource("BoxShape3D_cjkpx")
+
+[node name="TestLevel5" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(0.997574, 0.0696172, 0, -0.0696172, 0.997574, 0, 0, 0, 1, -5.36372, -40.3321, -207.943)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel5"]
+mesh = SubResource("BoxMesh_dk7vj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel5"]
+shape = SubResource("BoxShape3D_cjkpx")
+
+[node name="TestLevel3" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(-0.0696172, 0.997574, 0, -0.997574, -0.0696172, 0, 0, 0, 1, 48.7271, -0.25, 0.827965)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18939, -17.0433, 0)
+mesh = SubResource("BoxMesh_dk7vj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18349, -16.9588, 0)
+shape = SubResource("BoxShape3D_cjkpx")
 
 [node name="Player" parent="Node3D" instance=ExtResource("1_baenq")]
