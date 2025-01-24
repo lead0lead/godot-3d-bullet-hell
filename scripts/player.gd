@@ -1,9 +1,10 @@
 extends CharacterBody3D
 @export_group("Movement")
-@export var movement_speed := 8.0
-@export var acceleration := 60.0
+#@export var movement_speed := 8.0
+@export var acceleration := 40.0
 @export var rotation_speed := 8.0
 @export var flight_impulse := 12.0
+@export var friction := 5.0
 
 @export_group("Skin")
 @export var _skin: MeshInstance3D
@@ -21,21 +22,28 @@ func _physics_process(delta: float) -> void:
 	var camera_forward = _camera.global_basis.z
 	var camera_right = _camera.global_basis.x
 	
+	# handle player movement direction
+	
 	move_direction = camera_forward * player_input_direction.y + camera_right * player_input_direction.x
-	#move_direction.x = player_input_direction.x * _camera.global_basis.x
-	#move_direction.z = player_input_direction.y * _camera.global_basis.z
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
 	
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	
-	velocity = velocity.move_toward(move_direction * movement_speed
-			, acceleration * delta)
+	# movement acceleration
 	
+	if move_direction.length() > 0:
+		velocity += move_direction * acceleration * delta
+	else:
+		velocity = velocity.lerp(Vector3.ZERO, friction * delta)
+	
+	#velocity = velocity.move_toward(move_direction * movement_speed
+			#, acceleration * delta)
+	#
 	velocity.y = y_velocity + _gravity * delta
 	
-	if Input.is_action_pressed("fly"):
+	if Input.is_action_just_pressed("fly") and is_on_floor():
 		velocity.y = flight_impulse
 	
 	move_and_slide()
