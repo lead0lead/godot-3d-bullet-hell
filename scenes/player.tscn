@@ -48,13 +48,12 @@ shape = SubResource("CapsuleShape3D_4rsci")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 top_level = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_7xni4")
-spring_length = 10.0
+spring_length = 7.5
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
 unique_name_in_owner = true

@@ -62,7 +62,7 @@ func _handle_camera_position(delta):
 		_camera_pivot.position = (_camera_pivot.position - x_offset_from_max)
 	else:
 		_camera_pivot.position = lerp(_camera_pivot.position,
-			 _player.position + (local_x_offset.normalized() * 4), camera_speed)
+			 _player.position, camera_speed)
 
 	if local_y_offset.length() > max_cam_y_distance:
 		_camera_pivot.position = (_camera_pivot.position - y_offset_from_max)
