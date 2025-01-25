@@ -1,13 +1,15 @@
 extends CharacterBody3D
-@export_group("Ground Movement")
+
+@export var _skin: MeshInstance3D
+
+@export_group("Movement")
 @export var movement_speed := 10.0
 @export var acceleration := 80.0
+@export var deceleration := 40.0
 @export var rotation_speed := 8.0
 @export var jump_impulse := 14.0
 @export var flight_impulse := 8.0
-
-@export_group("Skin")
-@export var _skin: MeshInstance3D
+@export var dash_impulse := 30.0
 
 @onready var _camera: Camera3D = %PlayerCamera
 
@@ -37,13 +39,17 @@ func _handle_movement(delta):
 	velocity = velocity.move_toward(_move_direction * movement_speed
 			, acceleration * delta)
 	
+	
 	velocity.y = y_velocity + _gravity * delta
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
 	
+	if Input.is_action_just_pressed("dash"):
+		_dash()
 	move_and_slide()
 
+	print("current speed: ", velocity.length())
 	if Input.is_action_just_pressed("toggle_flight"):
 		if not flying:
 			flying = true
@@ -51,7 +57,7 @@ func _handle_movement(delta):
 		else:
 			flying = false
 			print("flying off")
-	
+
 	_handle_flight()
 
 func _rotate_player_model(delta):
@@ -72,3 +78,8 @@ func _handle_flight():
 			velocity.y += flight_impulse
 	else:
 		pass
+
+func _dash():
+	var y_velocity = velocity.y
+	velocity = velocity.normalized() * (velocity.length() + dash_impulse)
+	velocity.y = y_velocity
