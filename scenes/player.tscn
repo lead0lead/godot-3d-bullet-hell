@@ -48,6 +48,7 @@ shape = SubResource("CapsuleShape3D_4rsci")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 top_level = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
