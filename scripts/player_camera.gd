@@ -3,8 +3,8 @@ extends Camera3D
 @export_range(0.0, 0.1) var camera_sensitivity := 0.0025
 
 @export var max_cam_x_distance := 12.0
-@export var max_cam_y_distance := 4.0
-@export var max_cam_z_distance := 0.5
+@export var max_cam_y_distance := 3.0
+@export var max_cam_z_distance := 1.0
 
 @export var camera_speed := 0.01
 
@@ -22,9 +22,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_camera_input_direction = event.screen_relative * camera_sensitivity
 		
 func _physics_process(delta: float) -> void:
-	
-	# handle camera rotation
-	
+	_handle_camera_position(delta)
+	_handle_camera_rotation(delta)
+
+func _handle_camera_rotation(delta):
 	_camera_pivot.rotation.x += _camera_input_direction.y
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, 
 		-PI / 2.0, PI / 2.0)
@@ -32,8 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	_camera_input_direction = Vector2.ZERO
 	
-	# handle camera positon
-	
+func _handle_camera_position(delta):
 	var vector_from_player: Vector3 = (_camera_pivot.position 
 		- _player.position)
 	

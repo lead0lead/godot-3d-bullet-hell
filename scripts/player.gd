@@ -6,6 +6,8 @@ extends CharacterBody3D
 @export var rotation_speed := 8.0
 @export var friction := 6.0
 
+@export var acceleration := 14.0
+
 @export_group("Air Movement")
 @export var flight_impulse := 12.0
 @export var air_cap := 0.85
@@ -35,29 +37,34 @@ func _physics_process(delta: float) -> void:
 	_move_direction.y = 0.0
 	_move_direction = _move_direction.normalized()
 	
-	if is_on_floor():
-		_handle_ground_physics(delta)
-		if Input.is_action_just_pressed("fly"):
-			velocity.y = flight_impulse
-	
-	else: 
-		_handle_air_physics(delta)
-	
-	#var y_velocity := velocity.y
-	#velocity.y = 0.0
+	#if is_on_floor():
+		#_handle_ground_physics(delta)
+		#if Input.is_action_just_pressed("fly"):
+			#velocity.y = flight_impulse
 	#
+	#else: 
+		#_handle_air_physics(delta)
+	#
+	####
+	
+	var y_velocity := velocity.y
+	velocity.y = 0.0
+	
 	# movement acceleration
-	#var scaled_accel = acceleration / (1.0 + velocity.length())
-	#
-	#if move_direction.length() > 0:
-		#velocity += move_direction * scaled_accel * delta
-	#else:
-		#velocity = velocity.lerp(Vector3.ZERO, friction * delta)
-	#
-	#velocity = velocity.move_toward(move_direction * movement_speed
-			#, acceleration * delta)
-	#
-	#velocity.y = y_velocity + _gravity * delta
+	var scaled_accel = acceleration / (1.0 + velocity.length())
+	
+	if _move_direction.length() > 0:
+		velocity += _move_direction * scaled_accel * delta
+	else:
+		velocity = velocity.lerp(Vector3.ZERO, friction * delta)
+	
+	velocity = velocity.move_toward(_move_direction * movement_speed
+			, acceleration * delta)
+	
+	velocity.y = y_velocity + _gravity * delta
+	
+	if Input.is_action_just_pressed("fly") and is_on_floor():
+		velocity.y = flight_impulse
 	
 	move_and_slide()
 	
