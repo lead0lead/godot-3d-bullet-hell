@@ -3,6 +3,7 @@ extends Node
 @export var initial_state: State
 
 var current_state: State
+var previous_state: State
 var states: Dictionary = {}
 
 func _ready():
@@ -35,4 +36,5 @@ func on_child_transition(state, new_state_name):
 		current_state.exit()
 	
 	new_state.enter()
+	previous_state = current_state
 	current_state = new_state

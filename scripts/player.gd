@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 @export var _skin: MeshInstance3D
 
@@ -18,7 +19,7 @@ extends CharacterBody3D
 
 var _move_direction = Vector3.ZERO
 var _last_move_direction := Vector3.FORWARD
-var _gravity := -50
+var gravity := -50
 var boosting: bool = false
 var flying: bool = false
 
@@ -52,7 +53,7 @@ func _handle_movement(delta):
 		velocity = velocity.move_toward(_move_direction * movement_speed
 				, acceleration * delta)
 		
-		velocity.y = y_velocity + _gravity * delta
+		velocity.y = y_velocity + gravity * delta
 		
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = jump_impulse
