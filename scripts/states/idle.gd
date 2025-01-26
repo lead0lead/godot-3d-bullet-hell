@@ -15,6 +15,11 @@ func physics_update(delta: float):
 	
 	player.velocity.y += (player.gravity * delta)
 	
+	# Change State to idle
+	
+	if Input.is_action_pressed("jump") and not player.is_on_floor():
+		transitioned.emit(self, "gliding")
+	
 	# Change State on Input
 	
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
