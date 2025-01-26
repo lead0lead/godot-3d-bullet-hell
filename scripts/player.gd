@@ -10,19 +10,23 @@ extends CharacterBody3D
 @export var dash_impulse := 30.0
 @export var flight_speed := 20.0
 @export var flight_acceleration := 120.0
+@export var glide_speed := 0.4
+
+@export var air_movement_speed := 7.5
 
 @onready var _camera: Camera3D = %PlayerCamera
 
 var _move_direction = Vector3.ZERO
 var _last_move_direction := Vector3.FORWARD
 var _gravity := -50
+var boosting: bool = false
 var flying: bool = false
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("fly"):
-		flying = true
+	if Input.is_action_pressed("boost"):
+		boosting = true
 	else:
-		flying = false
+		boosting = false
 		
 	_rotate_player_model(delta)
 	_handle_movement(delta)
@@ -35,9 +39,9 @@ func _handle_movement(delta):
 	var camera_forward = _camera.global_basis.z
 	var camera_right = _camera.global_basis.x
 
-	if not flying:
+	if not boosting:
 		if Input.is_action_pressed("jump") and not is_on_floor() and velocity.y <= 0:
-			velocity.y *= 0.2
+			velocity.y *= glide_speed
 		_move_direction = camera_forward * player_input_direction.y + camera_right * player_input_direction.x
 		_move_direction.y = 0.0
 		_move_direction = _move_direction.normalized()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=12 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
 [ext_resource type="Texture2D" uid="uid://l54h2tvr3o5e" path="res://crosshair030.png" id="3_egn86"]
+[ext_resource type="Script" path="res://scenes/state_machine.gd" id="5_qtidi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
 albedo_color = Color(0.827151, 0, 0.217989, 1)
@@ -77,3 +78,6 @@ texture = ExtResource("3_egn86")
 
 [node name="TestInput" type="Node" parent="."]
 script = ExtResource("2_mmey0")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_qtidi")
