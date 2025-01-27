@@ -1,6 +1,5 @@
 extends PlayerState
 
-
 func enter():
 	pass
 

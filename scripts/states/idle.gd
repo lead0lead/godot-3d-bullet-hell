@@ -38,7 +38,7 @@ func physics_update(delta: float):
 		transitioned.emit(self, "walking")
 		
 	if Input.is_action_just_pressed("toggle-flight"):
-		transitioned.emit(self, "flying")
+		transitioned.emit(self, "flyingidle")
 	
 	if Input.is_action_just_pressed("dash"):
 		transitioned.emit(self, "dashing")
