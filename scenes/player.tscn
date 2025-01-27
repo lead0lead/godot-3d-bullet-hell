@@ -1,19 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=11 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
 [ext_resource type="Texture2D" uid="uid://l54h2tvr3o5e" path="res://textures/crosshair030.png" id="3_egn86"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="5_qtidi"]
-[ext_resource type="Script" path="res://scripts/states/flying.gd" id="6_0jfy2"]
-[ext_resource type="Script" path="res://scripts/states/idle.gd" id="7_kgy0f"]
-[ext_resource type="Script" path="res://scripts/states/jumping.gd" id="7_yhvo3"]
-[ext_resource type="Script" path="res://scripts/states/gliding.gd" id="8_gbd4c"]
-[ext_resource type="Script" path="res://scripts/states/boosting.gd" id="9_u61ax"]
-[ext_resource type="Script" path="res://scripts/states/walking.gd" id="10_a2yvj"]
-[ext_resource type="Script" path="res://scripts/states/dashing.gd" id="12_0ak80"]
-[ext_resource type="Script" path="res://scripts/states/falling.gd" id="13_25ubr"]
-[ext_resource type="Script" path="res://scripts/states/flying_idle.gd" id="14_ywn3q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
 albedo_color = Color(0.827151, 0, 0.217989, 1)
@@ -87,33 +77,3 @@ texture = ExtResource("3_egn86")
 
 [node name="TestInput" type="Node" parent="."]
 script = ExtResource("2_mmey0")
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("5_qtidi")
-
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("7_kgy0f")
-
-[node name="Jumping" type="Node" parent="StateMachine"]
-script = ExtResource("7_yhvo3")
-
-[node name="Gliding" type="Node" parent="StateMachine"]
-script = ExtResource("8_gbd4c")
-
-[node name="Boosting" type="Node" parent="StateMachine"]
-script = ExtResource("9_u61ax")
-
-[node name="Walking" type="Node" parent="StateMachine"]
-script = ExtResource("10_a2yvj")
-
-[node name="Flying" type="Node" parent="StateMachine"]
-script = ExtResource("6_0jfy2")
-
-[node name="Dashing" type="Node" parent="StateMachine"]
-script = ExtResource("12_0ak80")
-
-[node name="Falling" type="Node" parent="StateMachine"]
-script = ExtResource("13_25ubr")
-
-[node name="FlyingIdle" type="Node" parent="StateMachine"]
-script = ExtResource("14_ywn3q")
