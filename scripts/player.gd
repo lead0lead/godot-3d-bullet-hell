@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 @export var _skin: MeshInstance3D
+@export var _muzzle: Node3D
 
 @export_group("Movement")
 @export var movement_speed := 10.0
@@ -20,6 +21,8 @@ class_name Player
 @export var glide_speed := 0.5
 
 @onready var _camera: Camera3D = %PlayerCamera
+@onready var _aimcast: RayCast3D = %Aimcast
+@onready var bullet = preload("res://scenes/bullet.tscn")
 
 enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
 var state := States.IDLE
@@ -41,6 +44,19 @@ func _physics_process(delta: float) -> void:
 	
 	var camera_forward = _camera.global_basis.z
 	var camera_right = _camera.global_basis.x
+
+	#Attacking
+
+	if Input.is_action_just_pressed("fire"):
+		print("fire button pressed")
+		if _aimcast.is_colliding():
+			print("aimcast colliding")
+			var b = bullet.instantiate()
+			_muzzle.add_child(b)
+			b.look_at(_aimcast.get_collision_point(), Vector3.UP)
+			b.shoot = true
+			
+	# State Machine
 
 	if state == States.FALLING:
 		if is_on_floor():
@@ -94,6 +110,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				set_state(States.FLYING_IDLE)
 				
+				
 		_move_direction = camera_forward * player_input_direction.y + camera_right * player_input_direction.x
 		_move_direction = _move_direction.normalized()
 	
@@ -125,8 +142,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	_rotate_player_model(delta)
-
-	print(velocity.y)
 
 func _rotate_player_model(delta):
 	if _move_direction.length() > 0.0:
@@ -163,5 +178,4 @@ func set_state(new_state: int) -> void:
 		applied_movement_speed = boost_speed
 		applied_acceleration = boost_acceleration
 
-	print(States.find_key(state))
-	print(applied_gravity)
+	# print(States.find_key(state))

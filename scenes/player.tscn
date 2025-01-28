@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=12 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -23,10 +23,13 @@ size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin")]
-collision_layer = 2
+[sub_resource type="BoxMesh" id="BoxMesh_ia2wk"]
+size = Vector3(0.2, 0.2, 2)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_muzzle")]
 script = ExtResource("1_yjuw3")
 _skin = NodePath("TestMesh")
+_muzzle = NodePath("RangedWeapon/Muzzle")
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -53,12 +56,17 @@ top_level = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_mask = 2
 shape = SubResource("SphereShape3D_7xni4")
 spring_length = 7.5
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraPivot/SpringArm3D"]
 unique_name_in_owner = true
 script = ExtResource("1_3o8u8")
+
+[node name="Aimcast" type="RayCast3D" parent="CameraPivot/SpringArm3D/PlayerCamera"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -1000)
 
 [node name="TextureRect" type="TextureRect" parent="CameraPivot/SpringArm3D/PlayerCamera"]
 custom_minimum_size = Vector2(64, 64)
@@ -77,3 +85,11 @@ texture = ExtResource("3_egn86")
 
 [node name="TestInput" type="Node" parent="."]
 script = ExtResource("2_mmey0")
+
+[node name="RangedWeapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeapon"]
+mesh = SubResource("BoxMesh_ia2wk")
+
+[node name="Muzzle" type="Node3D" parent="RangedWeapon"]
