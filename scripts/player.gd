@@ -86,8 +86,7 @@ func _physics_process(delta: float) -> void:
 	if state not in [States.BOOSTING, States.DASHING] and Input.is_action_just_pressed("dash"):
 		set_state(States.DASHING)
 		
-	## DASH STATE HERE ##
-	
+
 	if state not in [States.BOOSTING]:
 		if Input.is_action_just_pressed("toggle-flight"):
 			if state in [States.FLYING_IDLE, States.FLYING]:
@@ -106,7 +105,10 @@ func _physics_process(delta: float) -> void:
 			_move_direction.y = Vector3.UP.normalized().y
 		if Input.is_action_pressed("down"):
 			_move_direction.y = Vector3.DOWN.normalized().y
-			
+
+	if state in [States.DASHING] and _move_direction.length() == 0.0:
+		_move_direction = -camera_forward
+	
 	velocity = velocity.move_toward(_move_direction * applied_movement_speed, applied_acceleration * delta)
 	
 	velocity.y = velocity.y + applied_gravity * delta
@@ -114,6 +116,12 @@ func _physics_process(delta: float) -> void:
 	if state == States.JUMPING:
 		velocity.y = jump_impulse
 		set_state(States.FALLING)
+
+	if state in [States.DASHING]:
+		velocity = velocity.normalized() * (velocity.length() + dash_speed)
+		velocity.y = 0
+		set_state(previous_state)
+		
 
 	move_and_slide()
 	_rotate_player_model(delta)
