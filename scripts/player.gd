@@ -3,6 +3,7 @@ class_name Player
 
 @export var _skin: MeshInstance3D
 @export var _muzzle: Node3D
+@export var _ranged_weapon: Node3D
 
 @export_group("Movement")
 @export var movement_speed := 10.0
@@ -46,15 +47,16 @@ func _physics_process(delta: float) -> void:
 	var camera_right = _camera.global_basis.x
 
 	#Attacking
-
+	if _aimcast.is_colliding():
+		_ranged_weapon.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
+	else:
+		_ranged_weapon.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
+		
 	if Input.is_action_just_pressed("fire"):
-		print("fire button pressed")
-		if _aimcast.is_colliding():
-			print("aimcast colliding")
-			var b = bullet.instantiate()
-			_muzzle.add_child(b)
-			b.look_at(_aimcast.get_collision_point(), Vector3.UP)
-			b.shoot = true
+		var b = bullet.instantiate()
+		_muzzle.add_child(b)
+		#b.look_at(_aimcast.get_collision_point(), Vector3.UP)
+		b.shoot = true
 			
 	# State Machine
 

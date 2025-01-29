@@ -2,7 +2,7 @@ extends RigidBody3D
 class_name Bullet
 
 const DAMAGE = 50.0
-const SPEED = 10.0
+const SPEED = 5.0
 
 var shoot = false
 
@@ -15,10 +15,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
+	print("Bullet Hitbox")
 	#if body.is_in_group("Enemy"):
 		#body.health -= DAMAGE
-		#queue_free()
-	#else:
-		#queue_free()
 	queue_free()
 	print("bullet deleted")

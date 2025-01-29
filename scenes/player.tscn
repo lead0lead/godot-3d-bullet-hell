@@ -24,12 +24,14 @@ size = Vector3(0.5, 0.5, 0.25)
 [sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ia2wk"]
-size = Vector3(0.2, 0.2, 2)
+size = Vector3(0.6, 1, 0.2)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_muzzle")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_muzzle", "_ranged_weapon")]
+collision_layer = 2
 script = ExtResource("1_yjuw3")
 _skin = NodePath("TestMesh")
 _muzzle = NodePath("RangedWeapon/Muzzle")
+_ranged_weapon = NodePath("RangedWeapon")
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -56,7 +58,6 @@ top_level = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-collision_mask = 2
 shape = SubResource("SphereShape3D_7xni4")
 spring_length = 7.5
 
