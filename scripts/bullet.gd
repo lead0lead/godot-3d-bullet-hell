@@ -14,8 +14,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("Bullet Hitbox")
-	#if body.is_in_group("Enemy"):
-		#body.health -= DAMAGE
 	queue_free()
-	print("bullet deleted")
+	print("Bullet Collided")
