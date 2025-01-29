@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=18 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -20,20 +20,38 @@ height = 1.0
 [sub_resource type="BoxMesh" id="BoxMesh_68f3k"]
 size = Vector3(0.5, 0.5, 0.25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn8dg"]
+albedo_color = Color(0.133817, 7.20036e-05, 0.447232, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jwtgo"]
+material = SubResource("StandardMaterial3D_qn8dg")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4ytag"]
+material = SubResource("StandardMaterial3D_qn8dg")
+top_radius = 0.01
+bottom_radius = 0.3
+height = 1.0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vjbo1"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y57m7"]
+albedo_color = Color(0.377919, 0.377919, 0.377919, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_ia2wk"]
+material = SubResource("StandardMaterial3D_y57m7")
 size = Vector3(0.6, 1, 0.2)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_muzzle", "_ranged_weapon")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_ranged_weapon")]
 collision_layer = 2
 script = ExtResource("1_yjuw3")
 _skin = NodePath("TestMesh")
-_muzzle = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon/Muzzle")
 _ranged_weapon = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon")
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
@@ -49,6 +67,14 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.466534, -0.432712)
 mesh = SubResource("BoxMesh_68f3k")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879974, 0)
+mesh = SubResource("CylinderMesh_jwtgo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38603, 0)
+mesh = SubResource("CylinderMesh_4ytag")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -97,8 +123,9 @@ unique_name_in_owner = true
 shape = SubResource("SphereShape3D_vjbo1")
 spring_length = 3.0
 
-[node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D"]
+[node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D" node_paths=PackedStringArray("_muzzle")]
 script = ExtResource("5_aqun7")
+_muzzle = NodePath("Muzzle")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
 mesh = SubResource("BoxMesh_ia2wk")
