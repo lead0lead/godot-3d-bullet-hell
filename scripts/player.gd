@@ -4,6 +4,7 @@ class_name Player
 @export var _skin: MeshInstance3D
 @export var _muzzle: Node3D
 @export var _ranged_weapon: Node3D
+@export var _rate_of_fire := 0.15
 
 @export_group("Movement")
 @export var movement_speed := 10.0
@@ -23,6 +24,7 @@ class_name Player
 
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var _aimcast: RayCast3D = %Aimcast
+
 @onready var bullet = preload("res://scenes/bullet.tscn")
 
 enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
@@ -37,6 +39,8 @@ var applied_gravity := gravity
 
 var applied_movement_speed := movement_speed
 var applied_acceleration := acceleration
+
+var _can_fire: bool = true
 
 func _physics_process(delta: float) -> void:
 	
@@ -53,12 +57,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		_ranged_weapon.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
 		
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_pressed("fire") and _can_fire:
+		_can_fire = false
 		var b = bullet.instantiate()
 		_muzzle.add_child(b)
 		#b.look_at(_aimcast.get_collision_point(), Vector3.UP)
 		b.shoot = true
-			
+		await get_tree().create_timer(_rate_of_fire).timeout
+		_can_fire = true
+
 	# State Machine
 
 	if state == States.FALLING:
