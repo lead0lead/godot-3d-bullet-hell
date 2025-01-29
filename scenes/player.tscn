@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=14 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
 [ext_resource type="Texture2D" uid="uid://l54h2tvr3o5e" path="res://textures/crosshair030.png" id="3_egn86"]
+[ext_resource type="Script" path="res://scripts/ranged_weapon.gd" id="5_aqun7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
 albedo_color = Color(0.827151, 0, 0.217989, 1)
@@ -23,6 +24,8 @@ size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7xni4"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_vjbo1"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_ia2wk"]
 size = Vector3(0.6, 1, 0.2)
 
@@ -30,8 +33,8 @@ size = Vector3(0.6, 1, 0.2)
 collision_layer = 2
 script = ExtResource("1_yjuw3")
 _skin = NodePath("TestMesh")
-_muzzle = NodePath("RangedWeapon/Muzzle")
-_ranged_weapon = NodePath("RangedWeapon")
+_muzzle = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon/Muzzle")
+_ranged_weapon = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon")
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -87,10 +90,17 @@ texture = ExtResource("3_egn86")
 [node name="TestInput" type="Node" parent="."]
 script = ExtResource("2_mmey0")
 
-[node name="RangedWeapon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+[node name="RangedWeaponPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeapon"]
+[node name="SpringArm3D" type="SpringArm3D" parent="RangedWeaponPivot"]
+shape = SubResource("SphereShape3D_vjbo1")
+spring_length = 3.0
+
+[node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D"]
+script = ExtResource("5_aqun7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
 mesh = SubResource("BoxMesh_ia2wk")
 
-[node name="Muzzle" type="Node3D" parent="RangedWeapon"]
+[node name="Muzzle" type="Node3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]

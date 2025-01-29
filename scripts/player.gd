@@ -46,7 +46,8 @@ func _physics_process(delta: float) -> void:
 	var camera_forward = _camera.global_basis.z
 	var camera_right = _camera.global_basis.x
 
-	#Attacking
+	# Attacking
+	
 	if _aimcast.is_colliding():
 		_ranged_weapon.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
 	else:

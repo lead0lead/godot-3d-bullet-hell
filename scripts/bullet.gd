@@ -1,5 +1,4 @@
 extends RigidBody3D
-class_name Bullet
 
 const DAMAGE = 50.0
 const SPEED = 5.0
