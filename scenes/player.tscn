@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=20 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://l54h2tvr3o5e" path="res://textures/crosshair030.png" id="3_egn86"]
 [ext_resource type="Script" path="res://scripts/target_lock_on.gd" id="4_4837r"]
 [ext_resource type="Script" path="res://scripts/ranged_weapon.gd" id="5_aqun7"]
+[ext_resource type="Script" path="res://scripts/player_ui.gd" id="7_t6iij"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
 albedo_color = Color(0.827151, 0, 0.217989, 1)
@@ -100,6 +101,7 @@ unique_name_in_owner = true
 target_position = Vector3(0, 0, -1000)
 
 [node name="TextureRect" type="TextureRect" parent="CameraPivot/SpringArm3D/PlayerCamera"]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,3 +138,23 @@ mesh = SubResource("BoxMesh_ia2wk")
 
 [node name="TargetLockOn" type="Node" parent="."]
 script = ExtResource("4_4837r")
+
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+script = ExtResource("7_t6iij")
+
+[node name="Crosshair" type="TextureRect" parent="PlayerUI"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_egn86")

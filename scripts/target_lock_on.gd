@@ -1,7 +1,7 @@
 extends Node
 
-const DETECTION_AREA_WIDTH_RATIO := 0.5
-const DETECTION_AREA_HEIGHT_RATIO := 0.5
+@export var detection_area_width_ratio := 0.5
+@export var detection_area_height_ratio := 0.5
 @onready var _camera: Node3D = %PlayerCamera
 
 func _process(delta: float) -> void:
@@ -9,8 +9,8 @@ func _process(delta: float) -> void:
 	
 func find_lockon_targets() -> Array:
 	var screen_size = get_viewport().size
-	var detection_area_width = screen_size.x * DETECTION_AREA_WIDTH_RATIO
-	var detection_area_height = screen_size.x * DETECTION_AREA_HEIGHT_RATIO
+	var detection_area_width = screen_size.x * detection_area_width_ratio
+	var detection_area_height = screen_size.y * detection_area_height_ratio
 	var detection_area_x_start = (screen_size.x - detection_area_width) / 2
 	var detection_area_y_start = (screen_size.y - detection_area_width) / 2
 	var detection_area_x_end = detection_area_x_start + detection_area_width
