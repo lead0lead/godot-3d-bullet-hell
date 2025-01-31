@@ -1,7 +1,7 @@
 extends Node
 
 @export var detection_area_width_ratio := 0.5
-@export var detection_area_height_ratio := 0.5
+@export var detection_area_height_ratio := 0.6
 @onready var _camera: Node3D = %PlayerCamera
 
 func _process(delta: float) -> void:
@@ -40,7 +40,7 @@ func find_nearest_lockon_target():
 		return possible_targets.reduce(func(smallest, current):
 			if ((_camera.global_position 
 					- current.global_position).angle_to(-_camera.global_basis.z) 
-					< (_camera.global_position
+					> (_camera.global_position
 					- smallest.global_position).angle_to(-_camera.global_basis.z)):
 				return current
 			else:

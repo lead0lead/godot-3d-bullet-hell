@@ -27,7 +27,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_weapon_pivot_rotation(delta)
 	var lock_on_target = _target_lock_on.find_nearest_lockon_target()
-	print(lock_on_target)
 	if lock_on_target:
 		self.look_at(lock_on_target.global_position, _camera.global_basis.y)
 	else:
