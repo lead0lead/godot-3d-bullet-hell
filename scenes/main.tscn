@@ -88,8 +88,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6401, 0, -13.0629)
 [node name="Enemy2" parent="." instance=ExtResource("2_gfefn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.29375, 0, -14.6302)
 
+[node name="Enemy5" parent="." instance=ExtResource("2_gfefn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54543, 0, -13.3499)
+
+[node name="Enemy6" parent="." instance=ExtResource("2_gfefn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.859, 0, 0.527489)
+
 [node name="Enemy3" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0998, 0, -8.43278)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.561111, 0, -17.675)
 
 [node name="Enemy4" parent="." instance=ExtResource("2_gfefn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48522, 0, -24.7789)

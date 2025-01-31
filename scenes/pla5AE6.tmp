@@ -124,10 +124,9 @@ unique_name_in_owner = true
 shape = SubResource("SphereShape3D_vjbo1")
 spring_length = 3.0
 
-[node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D" node_paths=PackedStringArray("_muzzle", "_target_lock_on")]
+[node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D" node_paths=PackedStringArray("_muzzle")]
 script = ExtResource("5_aqun7")
 _muzzle = NodePath("Muzzle")
-_target_lock_on = NodePath("../../../TargetLockOn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
 mesh = SubResource("BoxMesh_ia2wk")

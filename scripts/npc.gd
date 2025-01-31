@@ -9,4 +9,4 @@ func _ready() -> void:
 func _process(delta):
 	if health <= 0:
 		queue_free()
-		print("Enemy destroyed!")
+		print("Enemy destroyed!", self)

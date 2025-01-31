@@ -1,11 +1,13 @@
 extends Node
 
 const DETECTION_AREA_WIDTH_RATIO := 0.5
-const DETECTION_AREA_HEIGHT_RATIO := 0.4
+const DETECTION_AREA_HEIGHT_RATIO := 0.5
 @onready var _camera: Node3D = %PlayerCamera
 
 func _process(delta: float) -> void:
-
+	pass
+	
+func find_lockon_targets() -> Array:
 	var screen_size = get_viewport().size
 	var detection_area_width = screen_size.x * DETECTION_AREA_WIDTH_RATIO
 	var detection_area_height = screen_size.x * DETECTION_AREA_HEIGHT_RATIO
@@ -15,20 +17,31 @@ func _process(delta: float) -> void:
 	var detection_area_y_end = detection_area_y_start + detection_area_height
 	
 	var possible_targets = get_tree().get_nodes_in_group("Enemy")
-	possible_targets = possible_targets.map(func(possible_target):
-		if possible_target is Node3D and _camera.is_position_in_frustum(possible_target.global_position):
-			return possible_target)
 	
-	if possible_targets.size() > 0:
-		possible_targets = possible_targets.map(func(possible_target):
-			if not possible_target:
-				return
-			var target_screen_pos = _camera.unproject_position(possible_target.global_position)
-			if possible_target != null and ((float(target_screen_pos.x) >= detection_area_x_start 
-					and float(target_screen_pos.x) <= detection_area_x_end
-					and float(target_screen_pos.y) >= detection_area_x_start
-					and float(target_screen_pos.y) <= detection_area_y_end)):
-				return possible_target)
-				
-	print(possible_targets)
-	print(possible_targets.size())
+	var possible_targets_in_view = []
+	for possible_target in possible_targets:
+		if _camera.is_position_in_frustum(possible_target.global_position):
+			possible_targets_in_view.append(possible_target)
+
+	var possible_targets_in_detection_area = []
+	for possible_target in possible_targets_in_view:
+		var target_screen_pos = _camera.unproject_position(possible_target.global_position)
+		if ((float(target_screen_pos.x) >= detection_area_x_start 
+				and float(target_screen_pos.x) <= detection_area_x_end
+				and float(target_screen_pos.y) >= detection_area_x_start
+				and float(target_screen_pos.y) <= detection_area_y_end)):
+			possible_targets_in_detection_area.append(possible_target)
+
+	return possible_targets_in_detection_area
+
+func find_nearest_lockon_target():
+	var possible_targets := find_lockon_targets()
+	if possible_targets:
+		return possible_targets.reduce(func(smallest, current):
+			if ((_camera.global_position 
+					- current.global_position).angle_to(-_camera.global_basis.z) 
+					< (_camera.global_position
+					- smallest.global_position).angle_to(-_camera.global_basis.z)):
+				return current
+			else:
+				return smallest)
