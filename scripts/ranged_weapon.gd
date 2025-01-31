@@ -45,3 +45,21 @@ func fire():
 		await get_tree().create_timer(_rate_of_fire).timeout
 		_can_fire = true
 		
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Enemy"):
+		_enemies_in_view.append(body)
+		print("Enemy spotted")
+		print(_enemies_in_view)
+		
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.is_in_group("Enemy"):
+		_enemies_in_view.erase(body)
+		print("enemy left view")
+		print(_enemies_in_view)
+
+func _find_closest_lockon_target():
+	return _enemies_in_view.reduce(func(closest, target): 
+		return target if (_player.global_basis.z.dot(_player.global_position 
+		- target.global_position) 
+		< _player.global_basis.z.dot(_player.global_position 
+		- target.global_position)) else closest)
