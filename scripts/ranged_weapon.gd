@@ -14,6 +14,10 @@ extends Node3D
 @onready var _player := _ranged_weapon_pivot.get_parent()
 
 @onready var bullet = preload("res://scenes/bullet.tscn")
+@onready var _aimcast: RayCast3D = %Aimcast
+@onready var _camera: Camera3D = %PlayerCamera
+
+var _enemies_in_view := []
 
 var _can_fire: bool = true
 
@@ -22,11 +26,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_handle_weapon_pivot_rotation(delta)
-
+	if _aimcast.is_colliding():
+		self.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
+	else:
+		self.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
+		
 func _handle_weapon_pivot_rotation(delta):
-	
 	_ranged_weapon_pivot.look_at(_player.position - _camera_pivot.global_basis.x - _camera_pivot.global_basis.y)
-
+		
 func fire():
 	if _can_fire:
 		_can_fire = false
@@ -36,3 +43,14 @@ func fire():
 		b.shoot = true
 		await get_tree().create_timer(_rate_of_fire).timeout
 		_can_fire = true
+		
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Enemie"):
+		_enemies_in_view.append(body)
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.is_in_group("Enemie"):
+		_enemies_in_view.erase(body)
+
+func _find_closest_lockon_target():
+	pass

@@ -21,7 +21,6 @@ class_name Player
 @export var glide_speed := 0.5
 
 @onready var _camera: Camera3D = %PlayerCamera
-@onready var _aimcast: RayCast3D = %Aimcast
 
 enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
 var state := States.IDLE
@@ -46,11 +45,6 @@ func _physics_process(delta: float) -> void:
 
 	# Attacking
 	
-	if _aimcast.is_colliding():
-		_ranged_weapon.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
-	else:
-		_ranged_weapon.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
-		
 	if Input.is_action_pressed("fire"):
 		_ranged_weapon.fire()
 

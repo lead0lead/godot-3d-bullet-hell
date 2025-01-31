@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://textures/icon.svg"
 
+[global_group]
+
+Enemy="Can be damaged by the player"
+
 [input]
 
 left={
@@ -84,3 +88,4 @@ down={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Camera"
 3d_physics/layer_4="Bullet"
+3d_physics/layer_5="Enemy"
