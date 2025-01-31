@@ -25,6 +25,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	
 	_handle_weapon_pivot_rotation(delta)
 	if _aimcast.is_colliding():
 		self.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
@@ -45,12 +46,20 @@ func fire():
 		_can_fire = true
 		
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemie"):
+	if body.is_in_group("Enemy"):
 		_enemies_in_view.append(body)
-
+		print("Enemy spotted")
+		print(_enemies_in_view)
+		
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("Enemie"):
+	if body.is_in_group("Enemy"):
 		_enemies_in_view.erase(body)
+		print("enemy left view")
+		print(_enemies_in_view)
 
 func _find_closest_lockon_target():
-	pass
+	return _enemies_in_view.reduce(func(closest, target): 
+		return target if (_player.global_basis.z.dot(_player.global_position 
+		- target.global_position) 
+		< _player.global_basis.z.dot(_player.global_position 
+		- target.global_position)) else closest)
