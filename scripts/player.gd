@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Player
 
-@export var _skin: MeshInstance3D
+@export var _skin: Node3D
 @export var _ranged_weapon: Node3D
 
 @export_group("Movement")
@@ -139,7 +139,10 @@ func _rotate_player_model(delta):
 	if _move_direction.length() > 0.0:
 		_last_move_direction = _move_direction
 
-	var target_angle := Vector3.FORWARD.signed_angle_to(_last_move_direction
+	# Replace Vector3.BACK with Vector3.FORWARD once animation issues have been 
+	# fixed and new animation system is implemented
+	
+	var target_angle := Vector3.BACK.signed_angle_to(_last_move_direction
 		, Vector3.UP)
 	_skin.global_rotation.y = lerp_angle(_skin.rotation.y
 		, target_angle, rotation_speed * delta)
@@ -164,10 +167,21 @@ func set_state(new_state: int) -> void:
 		applied_gravity = 0.0
 		applied_movement_speed = flight_speed
 		applied_acceleration = flight_acceleration
+		_skin.animation_player.play("idle")
 	
 	if new_state in [States.BOOSTING]:
 		applied_gravity = 0.0
 		applied_movement_speed = boost_speed
 		applied_acceleration = boost_acceleration
+		_skin.animation_player.play("sitting")
 
+	if new_state in [States.WALKING]:
+		_skin.animation_player.play("running")
+
+	if new_state in [States.IDLE]:
+		_skin.animation_player.play("idle")
+	
+	if new_state in [States.JUMPING]:
+		_skin.animation_player.play("jumping")
+	
 	# print(States.find_key(state))
