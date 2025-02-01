@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 const DAMAGE = 20.0
-const SPEED = 5.0
+const SPEED = 3.0
 
 var shoot = false
 
