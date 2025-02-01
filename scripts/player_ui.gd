@@ -10,7 +10,7 @@ extends CanvasLayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_update_crosshair()
-	show_target_marker(false)
+	target_marker.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -27,9 +27,3 @@ func _update_crosshair():
 func update_target_marker(target):
 	target_marker.position = _camera.unproject_position(
 		target.lock_on_target.global_position)
-		
-func show_target_marker(visibile: bool):
-	if visible:
-		target_marker.visible = true
-	else:
-		target_marker.visible = false

@@ -31,18 +31,17 @@ func _process(delta: float) -> void:
 	if lock_on_target:
 		self.look_at(lock_on_target.lock_on_target.global_position, _camera.global_basis.y)
 		_player_ui.update_target_marker(lock_on_target)
-		_player_ui.show_target_marker(true)
+		_player_ui.target_marker.visible = true
 	else:
 		if _aimcast.is_colliding():
 			self.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
-			_player_ui.show_target_marker(false)
 		else:
 			self.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
-			_player_ui.show_target_marker(false)
+		_player_ui.target_marker.visible = false
 
 func _handle_weapon_pivot_rotation(delta):
 	_ranged_weapon_pivot.look_at(_player.position - _camera_pivot.global_basis.x - _camera_pivot.global_basis.y)
-		
+
 func fire():
 	if _can_fire:
 		_can_fire = false
@@ -52,4 +51,3 @@ func fire():
 		b.shoot = true
 		await get_tree().create_timer(_rate_of_fire).timeout
 		_can_fire = true
-		
