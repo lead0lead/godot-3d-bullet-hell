@@ -101,6 +101,7 @@ unique_name_in_owner = true
 target_position = Vector3(0, 0, -1000)
 
 [node name="TextureRect" type="TextureRect" parent="CameraPivot/SpringArm3D/PlayerCamera"]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 8
 anchor_left = 0.5
@@ -138,8 +139,10 @@ mesh = SubResource("BoxMesh_ia2wk")
 [node name="TargetLockOn" type="Node" parent="."]
 script = ExtResource("4_4837r")
 
-[node name="PlayerUI" type="CanvasLayer" parent="."]
+[node name="PlayerUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("target_marker")]
+unique_name_in_owner = true
 script = ExtResource("7_t6iij")
+target_marker = NodePath("TargetMarker")
 
 [node name="Crosshair" type="TextureRect" parent="PlayerUI"]
 unique_name_in_owner = true
@@ -157,4 +160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("3_egn86")
+
+[node name="TargetMarker" type="Sprite2D" parent="PlayerUI"]
 texture = ExtResource("3_egn86")

@@ -18,10 +18,11 @@ material = SubResource("StandardMaterial3D_mvx82")
 radius = 0.05
 height = 0.3
 
-[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target") groups=["Enemy"]]
 collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_j2urv")
+lock_on_target = NodePath("LockOnTarget")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -38,3 +39,6 @@ mesh = SubResource("CapsuleMesh_mo1v8")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.2, 0.5, 0.509)
 mesh = SubResource("CapsuleMesh_mo1v8")
+
+[node name="LockOnTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

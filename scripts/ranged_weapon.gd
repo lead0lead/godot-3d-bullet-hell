@@ -18,6 +18,7 @@ extends Node3D
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var _aimcast: RayCast3D = %Aimcast
 @onready var _camera: Camera3D = %PlayerCamera
+@onready var _player_ui: CanvasLayer = %PlayerUI
 
 var _can_fire: bool = true
 
@@ -28,13 +29,17 @@ func _process(delta: float) -> void:
 	_handle_weapon_pivot_rotation(delta)
 	var lock_on_target = _target_lock_on.find_nearest_lockon_target()
 	if lock_on_target:
-		self.look_at(lock_on_target.global_position, _camera.global_basis.y)
+		self.look_at(lock_on_target.lock_on_target.global_position, _camera.global_basis.y)
+		_player_ui.update_target_marker(lock_on_target)
+		_player_ui.show_target_marker(true)
 	else:
 		if _aimcast.is_colliding():
 			self.look_at(_aimcast.get_collision_point(), _camera.global_basis.y)
+			_player_ui.show_target_marker(false)
 		else:
 			self.look_at(_camera.global_transform * (Vector3.FORWARD * 1000.0))
-		
+			_player_ui.show_target_marker(false)
+
 func _handle_weapon_pivot_rotation(delta):
 	_ranged_weapon_pivot.look_at(_player.position - _camera_pivot.global_basis.x - _camera_pivot.global_basis.y)
 		
