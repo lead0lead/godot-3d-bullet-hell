@@ -1,7 +1,7 @@
 extends Node
 
 @export var detection_area_width_ratio := 0.5
-@export var detection_area_height_ratio := 0.6
+@export var detection_area_height_ratio := 0.4
 @onready var _camera: Node3D = %PlayerCamera
 
 func _process(delta: float) -> void:
@@ -12,7 +12,7 @@ func find_lockon_targets() -> Array:
 	var detection_area_width = screen_size.x * detection_area_width_ratio
 	var detection_area_height = screen_size.y * detection_area_height_ratio
 	var detection_area_x_start = (screen_size.x - detection_area_width) / 2
-	var detection_area_y_start = (screen_size.y - detection_area_width) / 2
+	var detection_area_y_start = (screen_size.y - detection_area_height) / 2
 	var detection_area_x_end = detection_area_x_start + detection_area_width
 	var detection_area_y_end = detection_area_y_start + detection_area_height
 	
@@ -28,7 +28,7 @@ func find_lockon_targets() -> Array:
 		var target_screen_pos = _camera.unproject_position(possible_target.global_position)
 		if ((float(target_screen_pos.x) >= detection_area_x_start 
 				and float(target_screen_pos.x) <= detection_area_x_end
-				and float(target_screen_pos.y) >= detection_area_x_start
+				and float(target_screen_pos.y) >= detection_area_y_start
 				and float(target_screen_pos.y) <= detection_area_y_end)):
 			possible_targets_in_detection_area.append(possible_target)
 

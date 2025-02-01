@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var crosshair_width = 0.5
-@export var crosshair_height = 0.5
+@export var crosshair_height = 0.4
 @export var target_marker: Sprite2D
 
 @onready var _crosshair: TextureRect = %Crosshair
