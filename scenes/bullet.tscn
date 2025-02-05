@@ -1,11 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://ciomk7fum7y7x"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_qbsy1"]
-[ext_resource type="Shader" uid="uid://bvk5ts58xhj5k" path="res://shaders/magic_projectile_shader.tres" id="2_76da8"]
-[ext_resource type="ArrayMesh" uid="uid://rpdxci23r15k" path="res://models/magic_projectile_mesh.obj" id="2_nnrw2"]
-[ext_resource type="Shader" uid="uid://b37va6yi507ck" path="res://shaders/magic_projectile_header_shader.tres" id="4_evesy"]
-[ext_resource type="Shader" uid="uid://11a2i1dfk76s" path="res://shaders/magic_projectile_trail.tres" id="5_dul7t"]
-[ext_resource type="Texture2D" uid="uid://bpcd2rgbyu0ci" path="res://textures/T_VFX_basic1.PNG" id="6_1m2sm"]
+[ext_resource type="Shader" uid="uid://bvk5ts58xhj5k" path="res://assets/shaders/magic_projectile_shader.tres" id="2_76da8"]
+[ext_resource type="ArrayMesh" uid="uid://rpdxci23r15k" path="res://assets/models/magic_projectile_mesh.obj" id="2_nnrw2"]
+[ext_resource type="Shader" uid="uid://b37va6yi507ck" path="res://assets/shaders/magic_projectile_header_shader.tres" id="4_evesy"]
+[ext_resource type="Shader" uid="uid://11a2i1dfk76s" path="res://assets/shaders/magic_projectile_trail.tres" id="5_dul7t"]
+[ext_resource type="Texture2D" uid="uid://bpcd2rgbyu0ci" path="res://assets/textures/T_VFX_basic1.PNG" id="6_1m2sm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gr7c"]
 radius = 0.307002
@@ -119,6 +119,11 @@ skeleton = NodePath("../MagicProjectileMesh")
 
 [node name="MagicProjectileTrailMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0.705599)
+material_override = SubResource("ShaderMaterial_nitn5")
+mesh = SubResource("QuadMesh_7h2ud")
+
+[node name="MagicProjectileTrailMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 0, 0, 0.705599)
 material_override = SubResource("ShaderMaterial_nitn5")
 mesh = SubResource("QuadMesh_7h2ud")
 

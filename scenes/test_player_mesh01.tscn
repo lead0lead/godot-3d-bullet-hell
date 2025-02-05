@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqjbiajaa1khp"]
+
+[ext_resource type="PackedScene" uid="uid://dob6d2kule5kl" path="res://assets/models/mn-ani-00.blend" id="1_les7t"]
+
+[node name="mn-ani-00" instance=ExtResource("1_les7t")]
+
+[node name="metarig_010" parent="." index="0"]
+transform = Transform3D(0.987736, 0.134489, -0.0793062, -0.145813, 0.976186, -0.160619, 0.0558161, 0.170213, 0.983825, -0.105584, -0.0442942, -0.179923)

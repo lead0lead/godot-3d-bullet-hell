@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://cykdgi2frf1gi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
+albedo_color = Color(0.827151, 0, 0.217989, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1kp56"]
+material = SubResource("StandardMaterial3D_n7vr8")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gg0yc"]
+material = SubResource("StandardMaterial3D_n7vr8")
+radius = 0.25
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_68f3k"]
+size = Vector3(0.5, 0.5, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn8dg"]
+albedo_color = Color(0.133817, 7.20036e-05, 0.447232, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jwtgo"]
+material = SubResource("StandardMaterial3D_qn8dg")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4ytag"]
+material = SubResource("StandardMaterial3D_qn8dg")
+top_radius = 0.01
+bottom_radius = 0.3
+height = 1.0
+
+[node name="TestMesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_1kp56")
+
+[node name="TestMesh3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.484896)
+mesh = SubResource("CapsuleMesh_gg0yc")
+skeleton = NodePath("../..")
+
+[node name="TestMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.466534, -0.432712)
+mesh = SubResource("BoxMesh_68f3k")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879974, 0)
+mesh = SubResource("CylinderMesh_jwtgo")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38603, 0)
+mesh = SubResource("CylinderMesh_4ytag")
