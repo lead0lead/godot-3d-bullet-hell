@@ -1,8 +1,6 @@
 extends State
 class_name IdleJumpLanding
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 const TRANSITION_TIMING = 0.9
 
 func _ready() -> void:
@@ -19,5 +17,5 @@ func check_relevance(input: InputPackage):
 
 
 func update(input: InputPackage, delta: float):
-	player.velocity.y -= gravity * delta
+	player.velocity.y -= player.gravity * delta
 	player.move_and_slide()

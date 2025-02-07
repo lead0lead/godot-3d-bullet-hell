@@ -1,8 +1,6 @@
 extends State
 class_name Idle
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 func _ready() -> void:
 	animation = "idle"
 	state_name = "idle"
@@ -16,5 +14,5 @@ func check_relevance(input) -> String:
 
 func update(input: InputPackage, delta: float):
 	if not player.is_on_floor():
-		player.velocity.y -= gravity * delta
+		player.velocity.y -= player.gravity * delta
 		player.move_and_slide()

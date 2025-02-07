@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bj40bmr88c8nf"]
+
+[ext_resource type="Texture2D" uid="uid://credj35lg1kkr" path="res://assets/textures/flare02.png" id="1_fbm46"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(4, 1, 0.25, 1)
+albedo_texture = ExtResource("1_fbm46")
+albedo_texture_force_srgb = true
+billboard_keep_scale = true

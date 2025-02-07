@@ -1,10 +1,6 @@
 extends State
 class_name Run
 
-const SPEED = 5.0
-
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 func _ready() -> void:
 	animation = "running"
 	state_name = "running"
@@ -27,11 +23,11 @@ func velocity_by_input(input: InputPackage, delta: float) -> Vector3:
 	var new_velocity = player.velocity
 	
 	player.direction = (player.camera.global_basis.z * input.input_direction.y + player.camera.global_basis.x * input.input_direction.x).normalized()
-	new_velocity.x = player.direction.x * SPEED
-	new_velocity.z = player.direction.z * SPEED
+	new_velocity.x = player.direction.x * player.run_speed
+	new_velocity.z = player.direction.z * player.run_speed
 	
 	if not player.is_on_floor():
-		new_velocity.y -= gravity * delta
+		new_velocity.y -= player.gravity * delta
 	
 	return new_velocity
 	

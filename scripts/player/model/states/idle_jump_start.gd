@@ -1,8 +1,6 @@
 extends State
 class_name IdleJumpStart
 
-const VERTICAL_SPEED_ADDED: float = 2.5
-
 const TRANSITION_TIMING = 1.3
 const JUMP_TIMING = 0.8
 
@@ -24,6 +22,6 @@ func check_relevance(input: InputPackage):
 func update(input, delta):
 	if works_longer_than(JUMP_TIMING):
 		if not jumped:
-			player.velocity.y += VERTICAL_SPEED_ADDED
+			player.velocity.y += player.jump_strength
 			jumped = true
 	player.move_and_slide()

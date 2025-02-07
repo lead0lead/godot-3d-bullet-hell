@@ -1,0 +1,78 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://4emo3a1akwlh"]
+
+[ext_resource type="Texture2D" uid="uid://credj35lg1kkr" path="res://assets/textures/flare02.png" id="1_cd6dl"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8fo7f"]
+expanded_output_ports = [0]
+texture = ExtResource("1_cd6dl")
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_00o70"]
+expanded_output_ports = [0]
+parameter_name = "Projectile_Header_Inside_Color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_h6vmx"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_4uw1r"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled, fog_disabled;
+
+uniform vec4 Projectile_Header_Inside_Color : source_color;
+uniform sampler2D tex_frg_2;
+
+
+
+void vertex() {
+	mat4 n_out2p0;
+// GetBillboardMatrix:2
+	{
+		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
+		n_out2p0 = __mvm;
+	}
+
+
+// Output:0
+	MODELVIEW_MATRIX = n_out2p0;
+
+
+}
+
+void fragment() {
+// ColorParameter:3
+	vec4 n_out3p0 = Projectile_Header_Inside_Color;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// VectorOp:4
+	vec2 n_out4p0 = vec2(n_out3p0.xy) + vec2(n_out2p0.xy);
+
+
+// Output:0
+	ALBEDO = vec3(n_out4p0, 0.0);
+	ALPHA = n_out2p0.x;
+
+
+}
+"
+modes/blend = 1
+modes/cull = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+flags/fog_disabled = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_4uw1r")
+nodes/vertex/2/position = Vector2(-20, 180)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_8fo7f")
+nodes/fragment/2/position = Vector2(-260, 240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_00o70")
+nodes/fragment/3/position = Vector2(-500, -100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_h6vmx")
+nodes/fragment/4/position = Vector2(40, 20)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 1, 4, 0, 0, 0, 3, 0, 4, 0, 2, 0, 4, 1)

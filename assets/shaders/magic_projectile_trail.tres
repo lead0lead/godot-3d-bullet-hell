@@ -25,7 +25,7 @@ texture_type = 1
 expanded_output_ports = [0]
 source = 5
 
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_g27ww"]
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_lr58m"]
 operator = 2
 
 [resource]
@@ -78,6 +78,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-453.571, -39.3661)
 modes/cull = 2
 flags/unshaded = true
 flags/shadows_disabled = true
@@ -97,6 +98,6 @@ nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_ha7aq")
 nodes/fragment/7/position = Vector2(-540, -220)
 nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_5mdwt")
 nodes/fragment/8/position = Vector2(-220, -220)
-nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_g27ww")
-nodes/fragment/9/position = Vector2(62.1418, 233.713)
-nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 4, 0, 5, 0, 5, 0, 3, 2, 6, 0, 5, 1, 7, 0, 8, 2, 8, 0, 0, 0, 8, 4, 9, 0, 2, 1, 9, 1, 9, 0, 0, 1)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_lr58m")
+nodes/fragment/9/position = Vector2(0, 280)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 4, 0, 5, 0, 5, 0, 3, 2, 6, 0, 5, 1, 7, 0, 8, 2, 8, 0, 0, 0, 9, 0, 0, 1, 8, 4, 9, 0, 2, 1, 9, 1)

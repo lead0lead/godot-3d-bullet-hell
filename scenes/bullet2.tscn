@@ -1,0 +1,105 @@
+[gd_scene load_steps=17 format=3 uid="uid://w6w835yy1yw2"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_ycek7"]
+[ext_resource type="Shader" uid="uid://blkncvqvskr1k" path="res://assets/shaders/magic_projectile_2_header_shader.tres" id="2_ju8sx"]
+[ext_resource type="Shader" uid="uid://4emo3a1akwlh" path="res://assets/shaders/magic_projectile_2_header_inside_shader.tres" id="3_05lqg"]
+[ext_resource type="Shader" uid="uid://11a2i1dfk76s" path="res://assets/shaders/magic_projectile_trail.tres" id="4_0lrn0"]
+[ext_resource type="Material" uid="uid://bj40bmr88c8nf" path="res://assets/shaders/magic_projectile_2_sparcles.tres" id="4_ued1i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_asqnn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65xcn"]
+render_priority = 0
+shader = ExtResource("2_ju8sx")
+shader_parameter/HeaderColor = Color(4, 2, 0.5, 1)
+shader_parameter/fresnel_power = 7.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4snbr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akvwu"]
+render_priority = 0
+shader = ExtResource("3_05lqg")
+shader_parameter/Projectile_Header_Inside_Color = Color(2, 1, 0.25, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sliqn"]
+
+[sub_resource type="Gradient" id="Gradient_nclbd"]
+offsets = PackedFloat32Array(0, 0.120192, 0.355769, 0.610577, 0.879808, 1)
+colors = PackedColorArray(0.737, 0, 0.035, 0, 1, 0.5, 0.25, 1, 4, 2, 0.5, 1, 1, 0.5, 0.25, 1, 1.289, 0.218, 0.326, 0, 0.737, 0, 0.035, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fueyv"]
+gradient = SubResource("Gradient_nclbd")
+use_hdr = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa8qh"]
+render_priority = 0
+shader = ExtResource("4_0lrn0")
+shader_parameter/trail_speed = Vector2(0.5, 0)
+shader_parameter/color_texture = SubResource("GradientTexture1D_fueyv")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ug2h3"]
+size = Vector2(2, 0.4)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kblat"]
+particle_flag_align_y = true
+emission_shape_offset = Vector3(0, 0, -0.4)
+emission_shape = 2
+emission_sphere_radius = 0.1
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+angular_velocity_min = 90.0
+angular_velocity_max = 90.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+color = Color(2, 1, 1, 0.999)
+
+[sub_resource type="QuadMesh" id="QuadMesh_nnvef"]
+size = Vector2(0.25, 0.25)
+orientation = 0
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 8
+gravity_scale = 0.0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_ycek7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_asqnn")
+
+[node name="MagicProjectileHeaderMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_65xcn")
+mesh = SubResource("SphereMesh_4snbr")
+skeleton = NodePath("")
+
+[node name="MagicProjectileHeaderInsideMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_akvwu")
+mesh = SubResource("QuadMesh_sliqn")
+
+[node name="MagicProjectileTrailMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1.06581e-14, 1, 4.02341e-21, 1, -1.06581e-14, -1, 0, -4.37114e-08, 0, 0, 1.04741)
+material_override = SubResource("ShaderMaterial_sa8qh")
+mesh = SubResource("QuadMesh_ug2h3")
+skeleton = NodePath("../MagicProjectileHeaderMesh")
+
+[node name="MagicProjectileTrailMesh3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 0, 0, 1.04741)
+material_override = SubResource("ShaderMaterial_sa8qh")
+mesh = SubResource("QuadMesh_ug2h3")
+skeleton = NodePath("../MagicProjectileHeaderMesh")
+
+[node name="TrailParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.507462)
+material_override = ExtResource("4_ued1i")
+amount = 10
+explosiveness = 0.4
+process_material = SubResource("ParticleProcessMaterial_kblat")
+draw_pass_1 = SubResource("QuadMesh_nnvef")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

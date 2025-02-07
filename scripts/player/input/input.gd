@@ -4,6 +4,7 @@ class_name InputGatherer
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
 
+
 	if Input.is_action_just_pressed("dash"):
 		new_input.actions.append("dash")
 	
@@ -25,7 +26,8 @@ func gather_input() -> InputPackage:
 	if Input.is_action_pressed("boost"):
 		new_input.actions.append("boosting")
 
-
+	if Input.is_action_just_pressed("fire"):
+		new_input.combat_actions.append(("firing"))
 
 	if new_input.actions.is_empty():
 		new_input.actions.append("idle")

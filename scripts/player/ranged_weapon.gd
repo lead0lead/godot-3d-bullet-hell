@@ -15,7 +15,7 @@ extends Node3D
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _player := _ranged_weapon_pivot.get_parent()
 
-@onready var bullet = preload("res://scenes/bullet.tscn")
+@onready var bullet = preload("res://scenes/bullet2.tscn")
 @onready var _aimcast: RayCast3D = %Aimcast
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var _player_ui: CanvasLayer = %PlayerUI

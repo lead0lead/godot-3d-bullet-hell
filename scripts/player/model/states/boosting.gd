@@ -1,9 +1,6 @@
 extends State
 class_name Boosting
 
-var boost_speed = 20.0
-var boost_accel = 120.0
-
 func _ready() -> void:
 	animation = "flying" #rename to boosting later...
 	state_name = "boosting"
@@ -17,7 +14,7 @@ func update(input, delta: float):
 	+ player.camera.global_basis.x 
 	* input.input_direction.x)
 	
-	player.velocity = player.velocity.move_toward(player.direction * boost_speed
-		, boost_accel * delta)
+	player.velocity = player.velocity.move_toward(player.direction * player.boost_speed
+		, player.boost_accel * delta)
 		
 	player.move_and_slide()

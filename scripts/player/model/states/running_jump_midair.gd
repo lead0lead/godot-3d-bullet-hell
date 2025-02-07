@@ -1,8 +1,6 @@
 extends State
 class_name RunningJumpMidair
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 @onready var downcast = $"../../Downcast"
 @onready var root_attachement = get_parent().get_parent()
 
@@ -27,5 +25,5 @@ func check_relevance(input: InputPackage):
 
 
 func update(input, delta: float):
-	player.velocity.y -= gravity * delta
+	player.velocity.y -= player.gravity * delta
 	player.move_and_slide()
