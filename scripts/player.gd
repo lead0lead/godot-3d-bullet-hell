@@ -35,6 +35,11 @@ var applied_gravity := gravity
 var applied_movement_speed := movement_speed
 var applied_acceleration := acceleration
 
+var enter_state_time: float
+
+const JUMP_TIMING := 0.0
+const JUMP_TRANSITION_TIMING := 0.0
+
 func _physics_process(delta: float) -> void:
 	
 	var player_input_direction = Input.get_vector("left", "right"
@@ -47,7 +52,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("fire"):
 		_ranged_weapon.fire()
-
+	
+	
 	# State Machine
 
 	if state == States.FALLING:
@@ -60,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			set_state(States.FLYING_IDLE)
 
-	if not is_on_floor() and state not in [States.BOOSTING, States.DASHING, States.FLYING_IDLE, States.FLYING]:
+	if not is_on_floor() and state not in [States.JUMPING, States.BOOSTING, States.DASHING, States.FLYING_IDLE, States.FLYING]:
 		set_state(States.FALLING)
 
 	if state == States.GLIDING:
@@ -123,8 +129,8 @@ func _physics_process(delta: float) -> void:
 	velocity.y = velocity.y + applied_gravity * delta
 	
 	if state == States.JUMPING:
-		velocity.y = jump_impulse
-		set_state(States.FALLING)
+		if works_longer_than(JUMP_TRANSITION_TIMING):
+			set_state(States.FALLING)
 
 	if state in [States.DASHING]:
 		velocity = velocity.normalized() * (velocity.length() + dash_speed)
@@ -152,36 +158,72 @@ func set_state(new_state: int) -> void:
 	if state != new_state:
 		previous_state = state
 		state = new_state
-	
+		mark_enter_state()
+
+
 	if previous_state in [States.GLIDING, States.BOOSTING, States.FLYING_IDLE, States.FLYING]:
 		applied_gravity = gravity
-		
+
 	if previous_state in [States.FLYING_IDLE, States.FLYING, States.BOOSTING]:
 		applied_movement_speed = movement_speed
 		applied_acceleration = acceleration
-	
+		_skin.mount.visible = false
+
 	if new_state == States.GLIDING:
 		applied_gravity = gravity * glide_speed
-	
+		_skin.animation_player.play("Gliding")
+
+	if new_state == States.FALLING:
+		_skin.animation_player.play("Gliding")
+
 	if new_state in [States.FLYING, States.FLYING_IDLE]:
 		applied_gravity = 0.0
 		applied_movement_speed = flight_speed
 		applied_acceleration = flight_acceleration
-		_skin.animation_player.play("idle")
+		_skin.animation_player.play("Skating")
+		_skin.mount.visible = true
 	
 	if new_state in [States.BOOSTING]:
 		applied_gravity = 0.0
 		applied_movement_speed = boost_speed
 		applied_acceleration = boost_acceleration
-		_skin.animation_player.play("sitting")
+		_skin.animation_player.play("Flying")
+		_skin.mount.visible = true
 
 	if new_state in [States.WALKING]:
-		_skin.animation_player.play("running")
+		_skin.animation_player.play("Running")
 
 	if new_state in [States.IDLE]:
-		_skin.animation_player.play("idle")
+		_skin.animation_player.play("Idle")
 	
 	if new_state in [States.JUMPING]:
-		_skin.animation_player.play("jumping")
+		velocity.y += jump_impulse
+		_skin.animation_player.play("Gliding")
 	
 	# print(States.find_key(state))
+
+func mark_enter_state():
+	enter_state_time = Time.get_unix_time_from_system()
+
+func get_state_progress() -> float:
+	var now = Time.get_unix_time_from_system()
+	return now - enter_state_time
+
+func works_longer_than(time: float) -> bool:
+	if get_state_progress() >= time:
+		return true
+	else:
+		return false
+
+func works_less_than(time: float) -> bool:
+	if get_state_progress() < time:
+		return true
+	else:
+		return false
+
+func works_between(start: float, finish: float) -> bool:
+	var progress = get_state_progress()
+	if progress >= start and progress <= finish:
+		return true
+	else:
+		return false

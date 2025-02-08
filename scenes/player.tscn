@@ -1,43 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=23 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
-[ext_resource type="PackedScene" uid="uid://c5q12ii0a7kjn" path="res://scenes/test_player_mesh.tscn" id="2_jlfd1"]
 [ext_resource type="Script" path="res://scripts/test_input.gd" id="2_mmey0"]
+[ext_resource type="PackedScene" uid="uid://cswtrqr8gjxd1" path="res://scenes/witch_anims_test.tscn" id="2_wc67i"]
 [ext_resource type="Texture2D" uid="uid://l54h2tvr3o5e" path="res://textures/crosshair030.png" id="3_egn86"]
 [ext_resource type="Script" path="res://scripts/target_lock_on.gd" id="4_4837r"]
 [ext_resource type="Script" path="res://scripts/ranged_weapon.gd" id="5_aqun7"]
+[ext_resource type="PackedScene" uid="uid://bb2xr71sap3p6" path="res://scenes/book_weapon.tscn" id="7_3sowm"]
 [ext_resource type="Script" path="res://scripts/player_ui.gd" id="7_t6iij"]
+[ext_resource type="Shader" uid="uid://co40r3syvpqoi" path="res://shaders/book_weapon_muzzle_shader.tres" id="8_ci47j"]
 [ext_resource type="Texture2D" uid="uid://5av0civl840h" path="res://textures/crosshair.png" id="8_t0go2"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vr8"]
-albedo_color = Color(0.827151, 0, 0.217989, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1kp56"]
-material = SubResource("StandardMaterial3D_n7vr8")
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gg0yc"]
-material = SubResource("StandardMaterial3D_n7vr8")
-radius = 0.25
-height = 1.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_68f3k"]
-size = Vector3(0.5, 0.5, 0.25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qn8dg"]
-albedo_color = Color(0.133817, 7.20036e-05, 0.447232, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jwtgo"]
-material = SubResource("StandardMaterial3D_qn8dg")
-top_radius = 1.0
-bottom_radius = 1.0
-height = 0.05
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_4ytag"]
-material = SubResource("StandardMaterial3D_qn8dg")
-top_radius = 0.01
-bottom_radius = 0.3
-height = 1.0
+[ext_resource type="Texture2D" uid="uid://jwtqe34qwegi" path="res://textures/sparkle.png" id="9_0txkk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
 
@@ -52,37 +26,60 @@ albedo_color = Color(0.377919, 0.377919, 0.377919, 1)
 material = SubResource("StandardMaterial3D_y57m7")
 size = Vector3(0.6, 1, 0.2)
 
+[sub_resource type="Animation" id="Animation_753js"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.207901)]
+}
+
+[sub_resource type="Animation" id="Animation_qv02k"]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.207901), Vector3(0, 0, 0.333), Vector3(0, 0, 0.207901)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t53nc"]
+_data = {
+"RESET": SubResource("Animation_753js"),
+"fire": SubResource("Animation_qv02k")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wb6od"]
+render_priority = 0
+shader = ExtResource("8_ci47j")
+shader_parameter/magic_circle_color = Color(2, 1, 0.25, 1)
+shader_parameter/alpha_texture_params = ExtResource("9_0txkk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_calr2"]
+size = Vector2(1.5, 1.5)
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_ranged_weapon")]
 collision_layer = 2
 script = ExtResource("1_yjuw3")
-_skin = NodePath("mn-ani")
+_skin = NodePath("witch_anims_true")
 _ranged_weapon = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon")
 
-[node name="TestMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_1kp56")
-
-[node name="TestMesh3" type="MeshInstance3D" parent="TestMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.484896)
-mesh = SubResource("CapsuleMesh_gg0yc")
-skeleton = NodePath("../..")
-
-[node name="TestMesh2" type="MeshInstance3D" parent="TestMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.466534, -0.432712)
-mesh = SubResource("BoxMesh_68f3k")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.879974, 0)
-mesh = SubResource("CylinderMesh_jwtgo")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38603, 0)
-mesh = SubResource("CylinderMesh_4ytag")
-
-[node name="mn-ani" parent="." instance=ExtResource("2_jlfd1")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+[node name="witch_anims_true" parent="." instance=ExtResource("2_wc67i")]
+transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -135,12 +132,27 @@ spring_length = 3.0
 [node name="RangedWeapon" type="Node3D" parent="RangedWeaponPivot/SpringArm3D" node_paths=PackedStringArray("_muzzle", "_target_lock_on")]
 script = ExtResource("5_aqun7")
 _muzzle = NodePath("Muzzle")
+_rate_of_fire = 0.25
 _target_lock_on = NodePath("../../../TargetLockOn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
+visible = false
 mesh = SubResource("BoxMesh_ia2wk")
 
+[node name="RangedWeaponMesh" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon" instance=ExtResource("7_3sowm")]
+transform = Transform3D(7.64274e-16, -1.74846e-08, -0.4, -0.4, -1.74846e-08, 0, -1.74846e-08, 0.4, -1.74846e-08, 0, 0, 0.207901)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon/RangedWeaponMesh"]
+libraries = {
+"": SubResource("AnimationLibrary_t53nc")
+}
+
 [node name="Muzzle" type="Node3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon/Muzzle"]
+material_override = SubResource("ShaderMaterial_wb6od")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_calr2")
 
 [node name="TargetLockOn" type="Node" parent="."]
 script = ExtResource("4_4837r")

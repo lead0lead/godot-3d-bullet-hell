@@ -44,6 +44,7 @@ func _handle_weapon_pivot_rotation(delta):
 
 func fire():
 	if _can_fire:
+		$RangedWeaponMesh/AnimationPlayer.play("fire")
 		_can_fire = false
 		var b = bullet.instantiate()
 		_muzzle.add_child(b)
