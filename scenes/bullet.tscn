@@ -29,6 +29,7 @@ shader_parameter/Speed = Vector2(0, 2)
 render_priority = 0
 shader = ExtResource("4_evesy")
 shader_parameter/HeaderColor = Color(0.721569, 0, 0.101961, 1)
+shader_parameter/invert_fresnel = false
 shader_parameter/fresnel_power = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_tcv0a"]

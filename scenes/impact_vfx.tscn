@@ -1,9 +1,9 @@
 [gd_scene load_steps=25 format=3 uid="uid://cjh5g1u5t23a8"]
 
-[ext_resource type="Texture2D" uid="uid://crbeg8ot13dgm" path="res://textures/player/flare.png" id="1_nkfjs"]
+[ext_resource type="Texture2D" uid="uid://crbeg8ot13dgm" path="res://textures/flare.png" id="1_nkfjs"]
 [ext_resource type="Script" path="res://scripts/impact_vfx.gd" id="1_v5arh"]
-[ext_resource type="Texture2D" uid="uid://credj35lg1kkr" path="res://textures/player/flare02.png" id="2_jhnha"]
-[ext_resource type="Texture2D" uid="uid://bntfekai81pq6" path="res://textures/player/distortcircle.png" id="3_wxtrn"]
+[ext_resource type="Texture2D" uid="uid://credj35lg1kkr" path="res://textures/flare02.png" id="2_jhnha"]
+[ext_resource type="Texture2D" uid="uid://bntfekai81pq6" path="res://textures/distortcircle.png" id="3_wxtrn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wl7pn"]
 transparency = 1

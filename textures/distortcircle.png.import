@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv6klc5ultkmu"
-path.s3tc="res://.godot/imported/circle.png-f408716721411aba04feda5437e2720c.s3tc.ctex"
+uid="uid://bntfekai81pq6"
+path.s3tc="res://.godot/imported/distortcircle.png-f0ed4854504531920f68f939b2876170.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/player/circle.png"
-dest_files=["res://.godot/imported/circle.png-f408716721411aba04feda5437e2720c.s3tc.ctex"]
+source_file="res://textures/distortcircle.png"
+dest_files=["res://.godot/imported/distortcircle.png-f0ed4854504531920f68f939b2876170.s3tc.ctex"]
 
 [params]
 

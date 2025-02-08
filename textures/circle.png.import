@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://credj35lg1kkr"
-path.s3tc="res://.godot/imported/flare02.png-5168aaf2c263a4903c0a67bcb73e176d.s3tc.ctex"
+uid="uid://dv6klc5ultkmu"
+path.s3tc="res://.godot/imported/circle.png-4a59456dd508d8f8654dcd44a46b6012.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/player/flare02.png"
-dest_files=["res://.godot/imported/flare02.png-5168aaf2c263a4903c0a67bcb73e176d.s3tc.ctex"]
+source_file="res://textures/circle.png"
+dest_files=["res://.godot/imported/circle.png-4a59456dd508d8f8654dcd44a46b6012.s3tc.ctex"]
 
 [params]
 

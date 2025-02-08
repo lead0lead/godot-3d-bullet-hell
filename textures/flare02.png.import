@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crbeg8ot13dgm"
-path.s3tc="res://.godot/imported/flare.png-06f856500cfe749ae6dac8218540675c.s3tc.ctex"
+uid="uid://credj35lg1kkr"
+path.s3tc="res://.godot/imported/flare02.png-7709c739efbb4cd9f8424abad6c03696.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/player/flare.png"
-dest_files=["res://.godot/imported/flare.png-06f856500cfe749ae6dac8218540675c.s3tc.ctex"]
+source_file="res://textures/flare02.png"
+dest_files=["res://.godot/imported/flare02.png-7709c739efbb4cd9f8424abad6c03696.s3tc.ctex"]
 
 [params]
 
