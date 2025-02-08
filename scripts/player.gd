@@ -21,6 +21,9 @@ class_name Player
 @export var glide_speed := 0.5
 
 @onready var _camera: Camera3D = %PlayerCamera
+@onready var initital_mount_pos = _skin.mount.position
+@onready var initital_mount_rotation = _skin.mount.rotation
+
 
 enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
 var state := States.IDLE
@@ -167,7 +170,9 @@ func set_state(new_state: int) -> void:
 	if previous_state in [States.FLYING_IDLE, States.FLYING, States.BOOSTING]:
 		applied_movement_speed = movement_speed
 		applied_acceleration = acceleration
-		_skin.mount.visible = false
+		#_skin.mount.visible = false
+		_skin.mount.position = initital_mount_pos
+		_skin.mount.rotation = initital_mount_rotation
 
 	if new_state == States.GLIDING:
 		applied_gravity = gravity * glide_speed
@@ -181,14 +186,19 @@ func set_state(new_state: int) -> void:
 		applied_movement_speed = flight_speed
 		applied_acceleration = flight_acceleration
 		_skin.animation_player.play("Skating")
-		_skin.mount.visible = true
+		#_skin.mount.visible = true
+		_skin.mount.position = Vector3(0.0, 0.291, 0.0)
+		_skin.mount.rotation = Vector3(0.0, -180.0, 0.0)
 	
 	if new_state in [States.BOOSTING]:
 		applied_gravity = 0.0
 		applied_movement_speed = boost_speed
 		applied_acceleration = boost_acceleration
-		_skin.animation_player.play("Flying")
-		_skin.mount.visible = true
+		_skin.animation_player.play("Skating")
+		#_skin.mount.visible = true
+		_skin.mount.position = Vector3(0.0, 0.291, 0.0)
+		_skin.mount.rotation = Vector3(0.0, -180.0, 0.0)
+		
 
 	if new_state in [States.WALKING]:
 		_skin.animation_player.play("Running")
