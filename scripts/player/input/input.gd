@@ -18,10 +18,17 @@ func gather_input() -> InputPackage:
 		new_input.actions.append("run")
 
 	if Input.is_action_pressed("jump"):
-		if new_input.actions.has("run"):
-			new_input.actions.append("running_jump_start")
+		if (new_input.actions.has("running_jump start") 
+			or new_input.actions.has("idle_jump_start") 
+			or new_input.actions.has("idle_jump_midair")
+			or new_input.actions.has("running_jump_landing")
+			or new_input.actions.has("idle_jump_landing")):
+				new_input.actions.append("jump_pressed_midair")
 		else:
-			new_input.actions.append("idle_jump_start")
+			if new_input.actions.has("run"):
+				new_input.actions.append("running_jump_start")
+			else:
+				new_input.actions.append("idle_jump_start")
 
 	if Input.is_action_pressed("boost"):
 		new_input.actions.append("boosting")

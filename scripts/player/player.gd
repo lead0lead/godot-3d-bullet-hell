@@ -11,9 +11,11 @@ extends CharacterBody3D
 @export var jump_strength := 2.5
 @export var boost_speed := 20.0
 @export var boost_accel := 120.0
+@export var glide_factor := 0.5
+
+var double_jump_ready: bool = true
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 
 var direction = Vector3.FORWARD
 

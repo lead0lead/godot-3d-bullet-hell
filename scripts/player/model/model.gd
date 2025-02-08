@@ -19,7 +19,9 @@ var visuals_rotation_speed := 8.0
 		"idle_jump_start": $States/IdleJumpStart,
 		"idle_jump_midair": $States/IdleJumpMidair,
 		"idle_jump_landing": $States/IdleJumpLanding,
-		"boosting":$States/Boosting,
+		"boosting": $States/Boosting,
+		"jump_pressed_midair": $States/JumpPressedMidair,
+		"gliding": $States/Gliding,
 }
 
 func _ready() -> void:

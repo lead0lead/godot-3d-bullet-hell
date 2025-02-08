@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=43 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_eqsf7"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" path="res://scripts/player/model/states/idle.gd" id="12_c05f7"]
 [ext_resource type="Script" path="res://scripts/player/model/states/boosting.gd" id="12_paikv"]
 [ext_resource type="Script" path="res://scripts/player/model/states/run.gd" id="13_1vyrt"]
+[ext_resource type="Script" path="res://scripts/player/model/states/jump_pressed_midair.gd" id="13_54kye"]
+[ext_resource type="Script" path="res://scripts/player/model/states/gliding.gd" id="14_0petr"]
 [ext_resource type="Script" path="res://scripts/player/model/states/running_jump_start.gd" id="14_1piub"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
@@ -5045,6 +5047,12 @@ script = ExtResource("11_5tdpi")
 
 [node name="Boosting" type="Node" parent="Model/States"]
 script = ExtResource("12_paikv")
+
+[node name="JumpPressedMidair" type="Node" parent="Model/States"]
+script = ExtResource("13_54kye")
+
+[node name="Gliding" type="Node" parent="Model/States"]
+script = ExtResource("14_0petr")
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="Model"]
 unique_name_in_owner = true

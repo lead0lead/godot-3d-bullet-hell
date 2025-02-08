@@ -13,7 +13,15 @@ func check_relevance(input: InputPackage):
 		input.actions.sort_custom(state_priority_sort)
 		return input.actions[0]
 	else:
-		return "okay"
+		input.actions.sort_custom(state_priority_sort)
+		if (input.actions[0] == "boosting" 
+				or input.actions[0] == "jump_pressed_midair"):
+			print("option 2")
+			return input.actions[0]
+		else:
+			print("option 3")
+			return "okay"
+
 
 
 func update(input: InputPackage, delta: float):

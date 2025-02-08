@@ -130,7 +130,6 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.normalized() * (velocity.length() + dash_speed)
 		velocity.y = 0
 		set_state(previous_state)
-		
 
 	move_and_slide()
 	_rotate_player_model(delta)
@@ -148,27 +147,27 @@ func _rotate_player_model(delta):
 		, target_angle, rotation_speed * delta)
 
 func set_state(new_state: int) -> void:
-	
+
 	if state != new_state:
 		previous_state = state
 		state = new_state
-	
+
 	if previous_state in [States.GLIDING, States.BOOSTING, States.FLYING_IDLE, States.FLYING]:
 		applied_gravity = gravity
-		
+
 	if previous_state in [States.FLYING_IDLE, States.FLYING, States.BOOSTING]:
 		applied_movement_speed = movement_speed
 		applied_acceleration = acceleration
 	
 	if new_state == States.GLIDING:
 		applied_gravity = gravity * glide_speed
-	
+
 	if new_state in [States.FLYING, States.FLYING_IDLE]:
 		applied_gravity = 0.0
 		applied_movement_speed = flight_speed
 		applied_acceleration = flight_acceleration
 		_skin.animation_player.play("idle")
-	
+
 	if new_state in [States.BOOSTING]:
 		applied_gravity = 0.0
 		applied_movement_speed = boost_speed
@@ -180,8 +179,8 @@ func set_state(new_state: int) -> void:
 
 	if new_state in [States.IDLE]:
 		_skin.animation_player.play("idle")
-	
+
 	if new_state in [States.JUMPING]:
 		_skin.animation_player.play("jumping")
-	
+
 	# print(States.find_key(state))

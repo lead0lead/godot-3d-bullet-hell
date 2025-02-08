@@ -17,10 +17,11 @@ func check_relevance(input: InputPackage):
 		return "running_jump_landing"
 	else:
 		input.actions.sort_custom(state_priority_sort)
-		if input.actions[0] == "boosting":
-			return "boosting"
-		else:
-			return "okay"
+	if (input.actions[0] == "boosting" 
+			or input.actions[0] == "jump_pressed_midair"):
+		return input.actions[0]
+	else:
+		return "okay"
 
 
 

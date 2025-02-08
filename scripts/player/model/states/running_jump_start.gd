@@ -13,11 +13,16 @@ func _ready() -> void:
 	state_name = "running_jump_start"
 	
 func check_relevance(input: InputPackage):
-	if works_longer_than(TRANSITION_TIMING):
-		jumped = false
-		return "running_jump_midair"
-	else:
-		return "okay"
+	input.actions.sort_custom(state_priority_sort)
+	if input.actions[0] == "running_jump_start":
+		if works_longer_than(TRANSITION_TIMING):
+			jumped = false
+			return "running_jump_midair"
+		else:
+			return "okay"
+	if (input.actions[0] == "boosting" 
+			or input.actions[0] == "jump_pressed_midair"):
+		return input.actions[0]
 
 func update(input, delta):
 	if works_longer_than(JUMP_TIMING):

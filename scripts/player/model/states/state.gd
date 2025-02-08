@@ -14,6 +14,8 @@ static var state_priority: Dictionary = {
 	"idle_jump_start": 10,
 	"idle_jump_midair": 10,
 	"idle_jump_landing": 10,
+	"jump_pressed_midair": 11,
+	"gliding": 11,
 	"run": 2,
 	"running_jump_start": 10,
 	"running_jump_midair": 10,
