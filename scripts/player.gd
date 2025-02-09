@@ -23,6 +23,9 @@ class_name Player
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var initital_mount_pos = _skin.mount.position
 @onready var initital_mount_rotation = _skin.mount.rotation
+@onready var speedlines = $PlayerUI/Speedlines
+@onready var starting_fov := _camera.fov
+@onready var boost_fov := starting_fov + 5.0
 
 
 enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
@@ -166,7 +169,10 @@ func set_state(new_state: int) -> void:
 		state = new_state
 		mark_enter_state()
 
-
+	if previous_state in [States.BOOSTING]:
+		speedlines.visible = false
+		_camera.fov = starting_fov
+		
 	if previous_state in [States.GLIDING, States.BOOSTING, States.FLYING_IDLE, States.FLYING]:
 		applied_gravity = gravity
 
@@ -201,6 +207,8 @@ func set_state(new_state: int) -> void:
 		#_skin.mount.visible = true
 		_skin.mount.position = Vector3(0.0, 0.291, 0.0)
 		_skin.mount.rotation = Vector3(0.0, -180.0, 0.0)
+		speedlines.visible = true
+		_camera.fov = boost_fov
 		
 
 	if new_state in [States.WALKING]:
