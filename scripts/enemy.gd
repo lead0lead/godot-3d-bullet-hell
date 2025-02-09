@@ -3,11 +3,16 @@ class_name Enemy
 
 @export var lock_on_target: Node3D
 @export var line_of_sigth: RayCast3D
+@export var gun: Node3D
+
+@export var rate_of_fire: float = 0.4
 
 @onready var player_in_line_of_sight: bool = false
 
 @onready var starting_pos = position
 @onready var player = $"../Player"
+
+var can_fire := true
 var breadcrumbs: Array[Vector3] = [starting_pos]
 
 func is_player_in_line_of_sight() -> bool:

@@ -18,12 +18,13 @@ material = SubResource("StandardMaterial3D_qjf1b")
 radius = 0.05
 height = 0.3
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sigth") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sigth", "gun") groups=["Enemy"]]
 collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_j2urv")
 lock_on_target = NodePath("LockOnTarget")
 line_of_sigth = NodePath("LOS")
+gun = NodePath("Gun")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -47,3 +48,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="LOS" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -20)
 collision_mask = 3
+
+[node name="Gun" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

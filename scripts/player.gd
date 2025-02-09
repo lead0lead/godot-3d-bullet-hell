@@ -48,8 +48,8 @@ var applied_acceleration := acceleration
 
 var enter_state_time: float
 
-var current_health := max_health
-var current_stamina := max_stamina
+var health := max_health
+var stamina := max_stamina
 
 const JUMP_TIMING := 0.0
 const JUMP_TRANSITION_TIMING := 0.0
