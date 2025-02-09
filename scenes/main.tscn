@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://wtup6u4wgkew" path="res://scenes/player.tscn" id="1_baenq"]
 [ext_resource type="Texture2D" uid="uid://bengxe7beww4v" path="res://textures/texture_08_dark.png" id="1_f7k7p"]
-[ext_resource type="PackedScene" uid="uid://4rqwoueipw7k" path="res://scenes/enemy.tscn" id="2_gfefn"]
 [ext_resource type="Texture2D" uid="uid://by0v6thlpvcym" path="res://textures/texture_08.png" id="2_vxg0u"]
+[ext_resource type="PackedScene" uid="uid://q8wcha5oqbt" path="res://scenes/stationary_enemy.tscn" id="5_ox5ly"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isagd"]
 albedo_texture = ExtResource("1_f7k7p")
@@ -46,104 +46,104 @@ albedo_texture = ExtResource("1_f7k7p")
 
 [node name="Main" type="Node"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Main3D" type="Node3D" parent="."]
 
-[node name="TestLevel" type="StaticBody3D" parent="Node3D"]
+[node name="TestLevel" type="StaticBody3D" parent="Main3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main3D/TestLevel"]
 material_override = SubResource("StandardMaterial3D_isagd")
 mesh = SubResource("BoxMesh_dk7vj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main3D/TestLevel"]
 shape = SubResource("BoxShape3D_cjkpx")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D/TestLevel"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Main3D/TestLevel"]
 environment = SubResource("Environment_vfrhk")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/TestLevel"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Main3D/TestLevel"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0.25, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/TestLevel"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Main3D/TestLevel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.5, -6)
 use_collision = true
 size = Vector3(1, 6, 15)
 material = SubResource("StandardMaterial3D_h3nur")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/TestLevel"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Main3D/TestLevel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6129, 7.5, -21.2536)
 use_collision = true
 size = Vector3(6, 16, 5)
 material = SubResource("StandardMaterial3D_h3nur")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/TestLevel"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Main3D/TestLevel"]
 transform = Transform3D(0.744416, -0.588488, 0.315478, 0, 0.472474, 0.881345, -0.667716, -0.656088, 0.351717, -30.8512, -0.231915, -5.91622)
 use_collision = true
 size = Vector3(6, 7.52588, 5)
 material = SubResource("StandardMaterial3D_h3nur")
 
-[node name="TestLevel2" type="StaticBody3D" parent="Node3D"]
+[node name="TestLevel2" type="StaticBody3D" parent="Main3D"]
 transform = Transform3D(0.829116, 0.559077, 0, -0.559077, 0.829116, 0, 0, 0, 1, 0, -0.25, -96.777)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main3D/TestLevel2"]
 material_override = SubResource("StandardMaterial3D_5i2x1")
 mesh = SubResource("BoxMesh_dk7vj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main3D/TestLevel2"]
 shape = SubResource("BoxShape3D_cjkpx")
 
-[node name="TestLevel4" type="StaticBody3D" parent="Node3D"]
+[node name="TestLevel4" type="StaticBody3D" parent="Main3D"]
 transform = Transform3D(0.997574, 0.0696172, 0, -0.0696172, 0.997574, 0, 0, 0, 1, 79.8697, -40.3321, -104.684)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main3D/TestLevel4"]
 material_override = SubResource("StandardMaterial3D_m8cok")
 mesh = SubResource("BoxMesh_dk7vj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main3D/TestLevel4"]
 shape = SubResource("BoxShape3D_cjkpx")
 
-[node name="TestLevel5" type="StaticBody3D" parent="Node3D"]
+[node name="TestLevel5" type="StaticBody3D" parent="Main3D"]
 transform = Transform3D(0.997574, 0.0696172, 0, -0.0696172, 0.997574, 0, 0, 0, 1, -5.36372, -40.3321, -207.943)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main3D/TestLevel5"]
 material_override = SubResource("StandardMaterial3D_tykjk")
 mesh = SubResource("BoxMesh_dk7vj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel5"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main3D/TestLevel5"]
 shape = SubResource("BoxShape3D_cjkpx")
 
-[node name="TestLevel3" type="StaticBody3D" parent="Node3D"]
+[node name="TestLevel3" type="StaticBody3D" parent="Main3D"]
 transform = Transform3D(-0.0696172, 0.997574, 0, -0.997574, -0.0696172, 0, 0, 0, 1, 48.7271, -0.25, 0.827965)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/TestLevel3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main3D/TestLevel3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18939, -17.0433, 0)
 material_override = SubResource("StandardMaterial3D_8rjbu")
 mesh = SubResource("BoxMesh_dk7vj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestLevel3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main3D/TestLevel3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18349, -16.9588, 0)
 shape = SubResource("BoxShape3D_cjkpx")
 
-[node name="Player" parent="Node3D" instance=ExtResource("1_baenq")]
+[node name="StationaryEnemy" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7939, 9.53674e-07, -10.251)
 
-[node name="Enemy" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6401, 0, -13.0629)
+[node name="StationaryEnemy2" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.35184, 9.53674e-07, -10.4746)
 
-[node name="Enemy2" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.29375, 0, -14.6302)
+[node name="StationaryEnemy3" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6574, 9.53674e-07, 9.76201)
 
-[node name="Enemy5" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54543, 0, -13.3499)
+[node name="StationaryEnemy4" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8687, 9.53674e-07, -16.0201)
 
-[node name="Enemy6" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.859, 0, 0.527489)
+[node name="StationaryEnemy5" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69799, 9.53674e-07, -14.1667)
 
-[node name="Enemy7" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.859, 15.2605, -21.5938)
+[node name="StationaryEnemy6" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6087, 9.53674e-07, -0.337954)
 
-[node name="Enemy3" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.561111, 0, -17.675)
+[node name="StationaryEnemy7" parent="Main3D" instance=ExtResource("5_ox5ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3228, 15.25, -22.3959)
 
-[node name="Enemy4" parent="." instance=ExtResource("2_gfefn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48522, 0, -24.7789)
+[node name="Player" parent="Main3D" instance=ExtResource("1_baenq")]

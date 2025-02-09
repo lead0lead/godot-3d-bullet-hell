@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://q8wcha5oqbt"]
+
+[ext_resource type="Script" path="res://scripts/stationary_enemy.gd" id="1_banow"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkp2u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kitba"]
+albedo_color = Color(0.909218, 0, 0.134994, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l04gq"]
+material = SubResource("StandardMaterial3D_kitba")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvx82"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_whfq5"]
+material = SubResource("StandardMaterial3D_mvx82")
+radius = 0.05
+height = 0.3
+
+[node name="StationaryEnemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sigth") groups=["Enemy"]]
+script = ExtResource("1_banow")
+lock_on_target = NodePath("LockOnTarget")
+line_of_sigth = NodePath("LOS")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hkp2u")
+
+[node name="TestMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_l04gq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.2, 0.5, 0.509)
+mesh = SubResource("CapsuleMesh_whfq5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.2, 0.5, 0.509)
+mesh = SubResource("CapsuleMesh_whfq5")
+
+[node name="LockOnTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="LOS" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
+collision_mask = 3

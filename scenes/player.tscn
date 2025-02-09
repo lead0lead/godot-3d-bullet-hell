@@ -92,11 +92,12 @@ shader_parameter/mask_edge = 1.0
 shader_parameter/animation_speed = 20.0
 shader_parameter/noise = SubResource("NoiseTexture2D_sjddn")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_ranged_weapon")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_ranged_weapon", "lock_on_target") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_yjuw3")
 _skin = NodePath("witch_anims_true")
 _ranged_weapon = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon")
+lock_on_target = NodePath("LockOnTarget")
 
 [node name="witch_anims_true" parent="." instance=ExtResource("2_wc67i")]
 transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0, 0)
@@ -216,5 +217,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="LockOnTarget" type="Node3D" parent="."]
+transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0.65, 0)
 
 [connection signal="timeout" from="RangedWeaponPivot/SpringArm3D/RangedWeapon/HeavyFireCooldownTimer" to="RangedWeaponPivot/SpringArm3D/RangedWeapon" method="_on_heavy_fire_cooldown_timer_timeout"]

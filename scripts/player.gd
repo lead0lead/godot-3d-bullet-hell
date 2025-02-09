@@ -3,6 +3,7 @@ class_name Player
 
 @export var _skin: Node3D
 @export var _ranged_weapon: Node3D
+@export var lock_on_target: Node3D
 
 @export_group("Movement")
 @export var movement_speed := 10.0

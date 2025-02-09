@@ -18,6 +18,7 @@ config/icon="res://textures/icon.svg"
 [global_group]
 
 Enemy="Can be damaged by the player"
+Player=""
 
 [input]
 

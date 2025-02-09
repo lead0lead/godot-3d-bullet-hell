@@ -4,25 +4,26 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfo34"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kitba"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74pnj"]
 albedo_color = Color(0.909218, 0, 0.134994, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jnes4"]
-material = SubResource("StandardMaterial3D_kitba")
+material = SubResource("StandardMaterial3D_74pnj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvx82"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjf1b"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mo1v8"]
-material = SubResource("StandardMaterial3D_mvx82")
+material = SubResource("StandardMaterial3D_qjf1b")
 radius = 0.05
 height = 0.3
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sigth") groups=["Enemy"]]
 collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_j2urv")
 lock_on_target = NodePath("LockOnTarget")
+line_of_sigth = NodePath("LOS")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -42,3 +43,7 @@ mesh = SubResource("CapsuleMesh_mo1v8")
 
 [node name="LockOnTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="LOS" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
+collision_mask = 3

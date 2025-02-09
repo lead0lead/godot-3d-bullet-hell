@@ -68,7 +68,7 @@ func fire():
 			#get_tree().root.add_child(i)
 			#i.global_position = _aimcast.get_collision_point()
 			#var target = _aimcast.get_collider()
-			#if target.is_in_group("Enemy"):
+			#if target.("Enemy"):
 				#target.health -= heavy_fire_damage
 		#_can_heavy_fire = false
 		#_heavy_fire_cooldown_timer.start()
