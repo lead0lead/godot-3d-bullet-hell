@@ -154,6 +154,9 @@ material_override = SubResource("ShaderMaterial_wb6od")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_calr2")
 
+[node name="HeavyFireCooldownTimer" type="Timer" parent="RangedWeaponPivot/SpringArm3D/RangedWeapon"]
+wait_time = 7.0
+
 [node name="TargetLockOn" type="Node" parent="."]
 script = ExtResource("4_4837r")
 
@@ -183,3 +186,5 @@ expand_mode = 1
 
 [node name="TargetMarker" type="Sprite2D" parent="PlayerUI"]
 texture = ExtResource("3_egn86")
+
+[connection signal="timeout" from="RangedWeaponPivot/SpringArm3D/RangedWeapon/HeavyFireCooldownTimer" to="RangedWeaponPivot/SpringArm3D/RangedWeapon" method="_on_heavy_fire_cooldown_timer_timeout"]

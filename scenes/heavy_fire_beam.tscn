@@ -1,0 +1,171 @@
+[gd_scene load_steps=32 format=3 uid="uid://dg20sa0c0oh3i"]
+
+[ext_resource type="Script" path="res://scripts/heavy_fire_beam.gd" id="1_kjtyk"]
+[ext_resource type="Shader" uid="uid://duhkppukc07um" path="res://shaders/heavy_fire_beam_shader.tres" id="1_riki2"]
+[ext_resource type="Texture2D" uid="uid://cf8cb4fmt7s5t" path="res://textures/T_VFX_Noi55.png" id="2_5kvwa"]
+[ext_resource type="ArrayMesh" uid="uid://bs8864wkgsx25" path="res://models/heavy_fire_beam.res" id="2_eewlj"]
+[ext_resource type="ArrayMesh" uid="uid://bsl5l8ritrghl" path="res://models/heavy_fire_wave.res" id="4_gw018"]
+[ext_resource type="Shader" uid="uid://biw6hxagdvvmk" path="res://shaders/heavy_fire_sparks.tres" id="6_pd6m4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0cct"]
+render_priority = 0
+shader = ExtResource("1_riki2")
+shader_parameter/gradient_power = 1.0
+shader_parameter/Texture2DParameter = ExtResource("2_5kvwa")
+
+[sub_resource type="Curve" id="Curve_687yr"]
+_data = [Vector2(0.745536, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x7vaj"]
+curve = SubResource("Curve_687yr")
+
+[sub_resource type="Curve" id="Curve_li27e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(1, 1), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ahcok"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(1, 1), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_6gly2"]
+max_value = 8.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.254464, 8), 11.2, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6i7qi"]
+curve_x = SubResource("Curve_li27e")
+curve_y = SubResource("Curve_ahcok")
+curve_z = SubResource("Curve_6gly2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ubr2o"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_6i7qi")
+color = Color(1.5, 0.75, 0.2, 0.7)
+alpha_curve = SubResource("CurveTexture_x7vaj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sp4pr"]
+render_priority = 0
+shader = ExtResource("1_riki2")
+shader_parameter/gradient_power = 3.0
+shader_parameter/Texture2DParameter = ExtResource("2_5kvwa")
+
+[sub_resource type="Curve" id="Curve_t5w0e"]
+_data = [Vector2(0.754464, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_de48l"]
+curve = SubResource("Curve_t5w0e")
+
+[sub_resource type="Curve" id="Curve_rimct"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 1, Vector2(1, 0.5), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ynw65"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 1, Vector2(1, 0.5), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wvedn"]
+max_value = 8.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.245536, 8), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2b7rf"]
+curve_x = SubResource("Curve_rimct")
+curve_y = SubResource("Curve_ynw65")
+curve_z = SubResource("Curve_wvedn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_igl6b"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_2b7rf")
+color = Color(4, 2, 1, 0.8)
+alpha_curve = SubResource("CurveTexture_de48l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcykn"]
+render_priority = 0
+shader = ExtResource("1_riki2")
+shader_parameter/gradient_power = 3.0
+shader_parameter/Texture2DParameter = ExtResource("2_5kvwa")
+
+[sub_resource type="Curve" id="Curve_kcuqy"]
+_data = [Vector2(0.745536, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_umgxw"]
+curve = SubResource("Curve_kcuqy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ii1x0"]
+gravity = Vector3(0, 0, 0)
+color = Color(2, 1, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_umgxw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idomt"]
+render_priority = 0
+shader = ExtResource("6_pd6m4")
+
+[sub_resource type="Curve" id="Curve_hqggo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_840nu"]
+curve = SubResource("Curve_hqggo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f4m3j"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.5
+color = Color(2, 1, 0.5, 1)
+alpha_curve = SubResource("CurveTexture_840nu")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2yrs5"]
+size = Vector2(0.4, 0.4)
+
+[node name="HeavyFireBeam" type="Node3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_kjtyk")
+
+[node name="HeavyFireBeam" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_e0cct")
+cast_shadow = 0
+emitting = false
+amount = 2
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ubr2o")
+draw_pass_1 = ExtResource("2_eewlj")
+
+[node name="HeavyFireInnerBeam" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_sp4pr")
+cast_shadow = 0
+emitting = false
+amount = 2
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_igl6b")
+draw_pass_1 = ExtResource("2_eewlj")
+
+[node name="HeavyFireWave" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_mcykn")
+cast_shadow = 0
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ii1x0")
+draw_pass_1 = ExtResource("4_gw018")
+
+[node name="HeavyFireSparks" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_idomt")
+cast_shadow = 0
+emitting = false
+amount = 25
+lifetime = 0.4
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_f4m3j")
+draw_pass_1 = SubResource("QuadMesh_2yrs5")

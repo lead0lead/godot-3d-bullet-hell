@@ -55,6 +55,9 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("fire"):
 		_ranged_weapon.fire()
+		
+	if Input.is_action_just_pressed("heavy-fire"):
+		_ranged_weapon.heavy_fire()
 	
 	
 	# State Machine
