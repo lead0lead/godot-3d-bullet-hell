@@ -9,7 +9,7 @@ class_name Player
 @export var acceleration := 80.0
 @export var flight_speed := 7.5
 @export var flight_acceleration := 60.0
-@export var boost_speed := 20.0
+@export var boost_speed := 30.0
 @export var boost_acceleration := 120.0
 
 @export var fligt_ascension_speed := flight_speed * 10
@@ -19,6 +19,10 @@ class_name Player
 @export var jump_impulse := 20.0
 @export var dash_speed := 30.0
 @export var glide_speed := 0.5
+
+@export_group("Health and Stamina")
+@export var max_health := 100.0
+@export var max_stamina := 100.0
 
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var initital_mount_pos = _skin.mount.position
@@ -42,6 +46,9 @@ var applied_movement_speed := movement_speed
 var applied_acceleration := acceleration
 
 var enter_state_time: float
+
+var current_health := max_health
+var current_stamina := max_stamina
 
 const JUMP_TIMING := 0.0
 const JUMP_TRANSITION_TIMING := 0.0
