@@ -60,23 +60,23 @@ func fire():
 		await get_tree().create_timer(_rate_of_fire).timeout
 		_can_fire = true
 
-func heavy_fire():
-	if _can_heavy_fire:
-		print("heavy fire pressed")
-		if _aimcast.is_colliding():
-			var i = impact.instantiate()
-			get_tree().root.add_child(i)
-			i.global_position = _aimcast.get_collision_point()
-			var target = _aimcast.get_collider()
-			if target.is_in_group("Enemy"):
-				target.health -= heavy_fire_damage
-		_can_heavy_fire = false
-		_heavy_fire_cooldown_timer.start()
-		var heavy_fire_visuals = heavy_fire_beam.instantiate()
-		_muzzle.add_child(heavy_fire_visuals)
-		heavy_fire_visuals.animate_particles()
-	else:
-		print("heavy fire on cooldown")
+#func heavy_fire():
+	#if _can_heavy_fire:
+		#print("heavy fire pressed")
+		#if _aimcast.is_colliding():
+			#var i = impact.instantiate()
+			#get_tree().root.add_child(i)
+			#i.global_position = _aimcast.get_collision_point()
+			#var target = _aimcast.get_collider()
+			#if target.is_in_group("Enemy"):
+				#target.health -= heavy_fire_damage
+		#_can_heavy_fire = false
+		#_heavy_fire_cooldown_timer.start()
+		#var heavy_fire_visuals = heavy_fire_beam.instantiate()
+		#_muzzle.add_child(heavy_fire_visuals)
+		#heavy_fire_visuals.animate_particles()
+	#else:
+		#print("heavy fire on cooldown")
 
 
 func _on_heavy_fire_cooldown_timer_timeout() -> void:
