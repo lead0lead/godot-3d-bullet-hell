@@ -45,7 +45,6 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 mesh = SubResource("CapsuleMesh_whfq5")
 
 [node name="LockOnTarget" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="LOS" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -40)

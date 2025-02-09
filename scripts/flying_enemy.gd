@@ -35,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	if state == States.PERSUING:
 		var direction = global_position.direction_to(player.global_position)
 		velocity = velocity.move_toward(direction.normalized() * move_speed, accel * delta)
+		look_at(player.global_position)
 		move_and_slide()
 
 func set_state(new_state: int) -> void:

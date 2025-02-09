@@ -3,3 +3,4 @@
 [ext_resource type="PackedScene" uid="uid://d12xrdnbms7s3" path="res://models/flying_bomb_enemy_visuals.blend" id="1_4pykx"]
 
 [node name="flying_bomb_enemy" instance=ExtResource("1_4pykx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
