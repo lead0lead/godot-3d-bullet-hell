@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://q8wcha5oqbt"]
+[gd_scene load_steps=8 format=3 uid="uid://76jp3s7mq41v"]
 
-[ext_resource type="Script" path="res://scripts/stationary_enemy.gd" id="1_banow"]
+[ext_resource type="Script" path="res://scripts/flying_enemy.gd" id="1_4enet"]
+[ext_resource type="PackedScene" uid="uid://bqxk2kvtkyw8j" path="res://scenes/flying_bomb_enemy_visuals.tscn" id="2_hpk7l"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkp2u"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gj6of"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kitba"]
 albedo_color = Color(0.909218, 0, 0.134994, 1)
@@ -18,19 +20,20 @@ material = SubResource("StandardMaterial3D_mvx82")
 radius = 0.05
 height = 0.3
 
-[node name="StationaryEnemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sight", "gun") groups=["Enemy"]]
-script = ExtResource("1_banow")
+[node name="FlyingEnemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sight", "gun") groups=["Enemy"]]
+script = ExtResource("1_4enet")
 lock_on_target = NodePath("LockOnTarget")
 line_of_sight = NodePath("LOS")
 gun = NodePath("Gun")
-rate_of_fire = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_hkp2u")
+shape = SubResource("SphereShape3D_gj6of")
+
+[node name="flying_bomb_enemy" parent="." instance=ExtResource("2_hpk7l")]
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_l04gq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]

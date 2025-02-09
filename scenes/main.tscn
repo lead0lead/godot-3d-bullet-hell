@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bg0a7o7n6iwxa"]
+[gd_scene load_steps=17 format=3 uid="uid://bg0a7o7n6iwxa"]
 
 [ext_resource type="PackedScene" uid="uid://wtup6u4wgkew" path="res://scenes/player.tscn" id="1_baenq"]
 [ext_resource type="Texture2D" uid="uid://bengxe7beww4v" path="res://textures/texture_08_dark.png" id="1_f7k7p"]
 [ext_resource type="Texture2D" uid="uid://by0v6thlpvcym" path="res://textures/texture_08.png" id="2_vxg0u"]
 [ext_resource type="PackedScene" uid="uid://q8wcha5oqbt" path="res://scenes/stationary_enemy.tscn" id="5_ox5ly"]
+[ext_resource type="PackedScene" uid="uid://76jp3s7mq41v" path="res://scenes/flying_enemy.tscn" id="5_t1piv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isagd"]
 albedo_texture = ExtResource("1_f7k7p")
@@ -147,3 +148,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6087, 9.53674e-07, -0.3379
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3228, 15.25, -22.3959)
 
 [node name="Player" parent="Main3D" instance=ExtResource("1_baenq")]
+
+[node name="FlyingEnemy" parent="Main3D" instance=ExtResource("5_t1piv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.2101, 0, -47.38)

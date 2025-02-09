@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxk2kvtkyw8j"]
+
+[ext_resource type="PackedScene" uid="uid://d12xrdnbms7s3" path="res://models/flying_bomb_enemy_visuals.blend" id="1_4pykx"]
+
+[node name="flying_bomb_enemy" instance=ExtResource("1_4pykx")]

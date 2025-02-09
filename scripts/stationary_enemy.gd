@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	if state == States.ATTACKING:
 		look_at(Vector3(player.global_position.x, self.global_position.y
 			, player.global_position.z))
-		gun.look_at(player.global_position)
+		gun.look_at(player.lock_on_target.global_position)
 		fire()
 	
 	if state == States.STATIONARY:
