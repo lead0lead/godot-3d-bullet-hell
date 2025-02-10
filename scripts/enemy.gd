@@ -1,16 +1,16 @@
 extends npc
 class_name Enemy
 
-@export var lock_on_target: Node3D
-@export var line_of_sight: RayCast3D
-@export var gun: Node3D
-
 @export var rate_of_fire: float = 0.4
 
 @onready var player_in_line_of_sight: bool = false
 
 @onready var starting_pos = position
 @onready var player = $"../Player"
+@onready var lock_on_target: Node3D = $LockOnTarget
+@onready var line_of_sight: RayCast3D = $LOS
+@onready var gun: Node3D = $Gun
+@onready var skin = $Skin
 
 var can_fire := true
 var breadcrumbs: Array[Vector3] = [starting_pos]

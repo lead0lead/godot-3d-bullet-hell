@@ -20,16 +20,17 @@ material = SubResource("StandardMaterial3D_mvx82")
 radius = 0.05
 height = 0.3
 
-[node name="FlyingEnemy" type="CharacterBody3D" node_paths=PackedStringArray("lock_on_target", "line_of_sight", "gun") groups=["Enemy"]]
+[node name="FlyingEnemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_4enet")
-lock_on_target = NodePath("LockOnTarget")
-line_of_sight = NodePath("LOS")
-gun = NodePath("Gun")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_gj6of")
 
-[node name="flying_bomb_enemy" parent="." instance=ExtResource("2_hpk7l")]
+[node name="Skin" type="Node3D" parent="."]
+
+[node name="Skin" parent="Skin" instance=ExtResource("2_hpk7l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
@@ -45,10 +46,23 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 mesh = SubResource("CapsuleMesh_whfq5")
 
 [node name="LockOnTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="LOS" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -40)
-collision_mask = 3
+collision_mask = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LOS"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.9802)
+visible = false
+size = Vector3(0.25, 0.25, 40)
 
 [node name="Gun" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="RoamingPosRay" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 10)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RoamingPosRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+size = Vector3(0.25, 0.25, 10)
