@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name npc
 
-@export var health := 200.0
+@export var health := 100.0
 
 func _ready() -> void:
 	pass

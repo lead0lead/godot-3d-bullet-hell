@@ -11,9 +11,13 @@ class_name Enemy
 @onready var line_of_sight: RayCast3D = $LOS
 @onready var gun: Node3D = $Gun
 @onready var skin = $Skin
+@onready var health_bar = $HealthBarViewport/HealthBar
 
 var can_fire := true
 var breadcrumbs: Array[Vector3] = [starting_pos]
+
+func _ready() -> void:
+	health_bar.init_health(health)
 
 func is_player_in_line_of_sight() -> bool:
 	line_of_sight.look_at(player.lock_on_target.global_position)
@@ -22,3 +26,7 @@ func is_player_in_line_of_sight() -> bool:
 			if line_of_sight.get_collider().is_in_group("Player"):
 				return true
 	return false
+
+func take_damage(damage):
+	health -= damage
+	health_bar.health = health

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://76jp3s7mq41v"]
+[gd_scene load_steps=10 format=3 uid="uid://76jp3s7mq41v"]
 
 [ext_resource type="Script" path="res://scripts/flying_enemy.gd" id="1_4enet"]
 [ext_resource type="PackedScene" uid="uid://bqxk2kvtkyw8j" path="res://scenes/flying_bomb_enemy_visuals.tscn" id="2_hpk7l"]
+[ext_resource type="PackedScene" uid="uid://2c1n04ol44j8" path="res://scenes/health_bar.tscn" id="3_jvv1v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gj6of"]
 radius = 1.0
@@ -19,6 +20,9 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_mvx82")
 radius = 0.05
 height = 0.3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rv8ka"]
+viewport_path = NodePath("HealthBarViewport")
 
 [node name="FlyingEnemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_4enet")
@@ -66,3 +70,27 @@ target_position = Vector3(0, 0, 10)
 [node name="CSGBox3D" type="CSGBox3D" parent="RoamingPosRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 size = Vector3(0.25, 0.25, 10)
+
+[node name="HealthBarViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar" parent="HealthBarViewport" instance=ExtResource("3_jvv1v")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -12.0
+offset_right = 120.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HealthBarVisuals" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22306, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_rv8ka")
