@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=31 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -93,6 +93,13 @@ shader_parameter/mask_size = 0.25
 shader_parameter/mask_edge = 1.0
 shader_parameter/animation_speed = 20.0
 shader_parameter/noise = SubResource("NoiseTexture2D_sjddn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yy87a"]
+bg_color = Color(0, 0.657248, 0.0763797, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5k85y"]
 shader = ExtResource("15_iravb")
@@ -229,7 +236,13 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = 252.0
 offset_bottom = 36.0
-mouse_filter = 2
+
+[node name="StaminaBar" parent="PlayerUI" instance=ExtResource("14_6o57e")]
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 252.0
+offset_bottom = 72.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_yy87a")
 
 [node name="LowHealthIndicator" type="ColorRect" parent="PlayerUI"]
 visible = false
@@ -244,4 +257,8 @@ mouse_filter = 2
 [node name="LockOnTarget" type="Node3D" parent="."]
 transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0.65, 0)
 
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="timeout" from="RangedWeaponPivot/SpringArm3D/RangedWeapon/HeavyFireCooldownTimer" to="RangedWeaponPivot/SpringArm3D/RangedWeapon" method="_on_heavy_fire_cooldown_timer_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

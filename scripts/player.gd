@@ -25,7 +25,11 @@ class_name Player
 @export var max_health := 100.0
 @export var max_stamina := 100.0
 @export var stamina_regen_amount := 10.0
-@export var critical_health_amount := 20.0
+@export var critical_health_amount := 25.0
+
+@export var dash_stamina_consumption := 30.0
+@export var boost_stamina_consumption := 25.0
+@export var min_stamina_for_boost := 5.0
 
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var initital_mount_pos = _skin.mount.position
@@ -33,6 +37,7 @@ class_name Player
 @onready var player_ui = $PlayerUI
 @onready var speedlines = $PlayerUI/Speedlines
 @onready var low_health_indicator = $PlayerUI/LowHealthIndicator
+@onready var dash_cooldown_timer := $DashCooldownTimer
 @onready var starting_fov := _camera.fov
 @onready var boost_fov := starting_fov + 5.0
 
@@ -57,6 +62,8 @@ var stamina := max_stamina
 
 const JUMP_TIMING := 0.0
 const JUMP_TRANSITION_TIMING := 0.0
+
+var can_dash: bool = true
 
 func _physics_process(delta: float) -> void:
 	
@@ -107,18 +114,31 @@ func _physics_process(delta: float) -> void:
 	if state == States.FALLING and Input.is_action_pressed("jump"):
 		set_state(States.GLIDING)
 		
-	if Input.is_action_pressed("boost"):
+	if Input.is_action_pressed("boost") and stamina > 5.0:
 		set_state(States.BOOSTING)
 		
 	if state == States.BOOSTING:
 		_move_direction = ( -camera_forward 
 			+ camera_right * 
 			player_input_direction.x)
+		
+		stamina -= boost_stamina_consumption * delta
+		if stamina < 0.0:
+			stamina = 0.0
 			
+		player_ui.stamina_bar.health = stamina
+		
+		if stamina <= 0:
+			stamina = 0
+			set_state(previous_state)
+
 		if Input.is_action_just_released("boost"):
 			set_state(previous_state)
 	
-	if state not in [States.BOOSTING, States.DASHING] and Input.is_action_just_pressed("dash"):
+	if (state not in [States.BOOSTING, States.DASHING] 
+			and Input.is_action_just_pressed("dash") 
+			and stamina > dash_stamina_consumption
+			and can_dash):
 		set_state(States.DASHING)
 
 	if state not in [States.BOOSTING]:
@@ -155,8 +175,14 @@ func _physics_process(delta: float) -> void:
 	if state in [States.DASHING]:
 		velocity = velocity.normalized() * (velocity.length() + dash_speed)
 		velocity.y = 0
+		stamina -= dash_stamina_consumption
+		if stamina < 0.0:
+			stamina = 0.0
+		player_ui.stamina_bar.health = stamina
 		set_state(previous_state)
 		
+	if state not in [States.BOOSTING, States.DASHING]:
+		restore_stamina(delta)
 
 	move_and_slide()
 	_rotate_player_model(delta)
@@ -232,6 +258,10 @@ func set_state(new_state: int) -> void:
 		velocity.y += jump_impulse
 		_skin.animation_player.play("Gliding")
 	
+	if new_state in [States.DASHING]:
+		can_dash = false
+		dash_cooldown_timer.start()
+		
 	# print(States.find_key(state))
 
 func mark_enter_state():
@@ -278,3 +308,9 @@ func restore_stamina(delta):
 	
 	if stamina < 0.0:
 		stamina = 0.0
+	
+	player_ui.stamina_bar.health = stamina
+
+
+func _on_dash_cooldown_timer_timeout() -> void:
+	can_dash = true
