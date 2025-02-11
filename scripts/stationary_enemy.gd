@@ -7,6 +7,9 @@ var previous_state := state
 
 @onready var bullet = preload("res://scenes/bullet.tscn")
 
+func _ready() -> void:
+	health_bar.init_health(health)
+
 func _physics_process(delta: float) -> void:
 	if is_player_in_line_of_sight():
 		set_state(States.ATTACKING)

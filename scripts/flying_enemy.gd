@@ -20,6 +20,8 @@ func _ready() -> void:
 	set_state(States.ROAMING)
 	roaming_pos_ray.target_position = Vector3(0, 0, roaming_distance)
 
+	health_bar.init_health(health)
+
 func _physics_process(delta: float) -> void:
 	
 	if not current_roaming_target_pos:

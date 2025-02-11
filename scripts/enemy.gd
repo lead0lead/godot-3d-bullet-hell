@@ -16,9 +16,6 @@ class_name Enemy
 var can_fire := true
 var breadcrumbs: Array[Vector3] = [starting_pos]
 
-func _ready() -> void:
-	health_bar.init_health(health)
-
 func is_player_in_line_of_sight() -> bool:
 	line_of_sight.look_at(player.lock_on_target.global_position)
 	if line_of_sight.is_colliding():
