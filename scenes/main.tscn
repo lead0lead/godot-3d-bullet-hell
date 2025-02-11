@@ -153,7 +153,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3228, 15.25, -22.3959)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2376, 34.5834, 37.941)
 
 [node name="FlyingEnemy2" parent="Main3D" instance=ExtResource("5_t1piv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.8987, 0, -31.3594)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.8987, 0.532292, -31.3594)
 
 [node name="FlyingEnemy4" parent="Main3D" instance=ExtResource("5_t1piv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.7624, 12.7709, -38.7824)

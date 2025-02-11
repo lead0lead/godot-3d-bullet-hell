@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=32 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -15,6 +15,7 @@
 [ext_resource type="Shader" path="res://shaders/speedlines.gdshader" id="13_7jnyu"]
 [ext_resource type="PackedScene" uid="uid://2c1n04ol44j8" path="res://scenes/health_bar.tscn" id="14_6o57e"]
 [ext_resource type="Shader" uid="uid://dnvswmboniho7" path="res://shaders/low_health_indicator.tres" id="15_iravb"]
+[ext_resource type="PackedScene" uid="uid://ch4s2egsqt0g2" path="res://scenes/health_potion.tscn" id="16_vw0rp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
 
@@ -253,6 +254,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Inventory" type="Control" parent="PlayerUI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -52.0
+offset_right = 52.0
+offset_bottom = -12.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="HealthPotion" parent="PlayerUI/Inventory" instance=ExtResource("16_vw0rp")]
+layout_mode = 1
 
 [node name="LockOnTarget" type="Node3D" parent="."]
 transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0.65, 0)
