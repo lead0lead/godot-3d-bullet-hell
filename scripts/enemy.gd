@@ -18,6 +18,7 @@ var breadcrumbs: Array[Vector3] = [starting_pos]
 func is_player_in_line_of_sight() -> bool:
 	line_of_sight.look_at(player.lock_on_target.global_position)
 	if line_of_sight.is_colliding():
-		if line_of_sight.get_collider().is_in_group("Player"):
-			return true
+		if line_of_sight.get_collider():
+			if line_of_sight.get_collider().is_in_group("Player"):
+				return true
 	return false

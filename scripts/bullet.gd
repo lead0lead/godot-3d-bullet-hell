@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group(target_group):
-		body.health -= damage
+		body.take_damage(damage)
 	animate_impact()
 	queue_free()
 

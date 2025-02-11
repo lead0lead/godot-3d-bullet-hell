@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://wtup6u4wgkew"]
+[gd_scene load_steps=30 format=3 uid="uid://wtup6u4wgkew"]
 
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="1_3o8u8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_yjuw3"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://5av0civl840h" path="res://textures/crosshair.png" id="8_t0go2"]
 [ext_resource type="Texture2D" uid="uid://jwtqe34qwegi" path="res://textures/sparkle.png" id="9_0txkk"]
 [ext_resource type="Shader" path="res://shaders/speedlines.gdshader" id="13_7jnyu"]
+[ext_resource type="PackedScene" uid="uid://2c1n04ol44j8" path="res://scenes/health_bar.tscn" id="14_6o57e"]
+[ext_resource type="Shader" uid="uid://dnvswmboniho7" path="res://shaders/low_health_indicator.tres" id="15_iravb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4rsci"]
 
@@ -91,6 +93,10 @@ shader_parameter/mask_size = 0.25
 shader_parameter/mask_edge = 1.0
 shader_parameter/animation_speed = 20.0
 shader_parameter/noise = SubResource("NoiseTexture2D_sjddn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5k85y"]
+shader = ExtResource("15_iravb")
+shader_parameter/indicator_color = Color(0.435, 0, 0.026, 0.9)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_skin", "_ranged_weapon", "lock_on_target") groups=["Player"]]
 collision_layer = 2
@@ -211,6 +217,23 @@ texture = ExtResource("3_egn86")
 [node name="Speedlines" type="ColorRect" parent="PlayerUI"]
 visible = false
 material = SubResource("ShaderMaterial_h1sca")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HealthBar" parent="PlayerUI" instance=ExtResource("14_6o57e")]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 252.0
+offset_bottom = 36.0
+mouse_filter = 2
+
+[node name="LowHealthIndicator" type="ColorRect" parent="PlayerUI"]
+visible = false
+material = SubResource("ShaderMaterial_5k85y")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

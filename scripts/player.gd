@@ -24,11 +24,15 @@ class_name Player
 @export_group("Health and Stamina")
 @export var max_health := 100.0
 @export var max_stamina := 100.0
+@export var stamina_regen_amount := 10.0
+@export var critical_health_amount := 20.0
 
 @onready var _camera: Camera3D = %PlayerCamera
 @onready var initital_mount_pos = _skin.mount.position
 @onready var initital_mount_rotation = _skin.mount.rotation
+@onready var player_ui = $PlayerUI
 @onready var speedlines = $PlayerUI/Speedlines
+@onready var low_health_indicator = $PlayerUI/LowHealthIndicator
 @onready var starting_fov := _camera.fov
 @onready var boost_fov := starting_fov + 5.0
 
@@ -255,3 +259,22 @@ func works_between(start: float, finish: float) -> bool:
 		return true
 	else:
 		return false
+
+func take_damage(damage):
+	if health > 0:
+		health -= damage
+	if health <= 0:
+		health = 0
+	player_ui.health_bar.health = health
+	if health < critical_health_amount:
+		low_health_indicator.visible = true
+	else: low_health_indicator.visible = false
+
+func restore_stamina(delta):
+	if stamina < max_stamina:
+		stamina += stamina_regen_amount * delta
+	else:
+		stamina = max_stamina
+	
+	if stamina < 0.0:
+		stamina = 0.0
