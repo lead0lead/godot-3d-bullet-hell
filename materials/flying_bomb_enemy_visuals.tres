@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c468a67pgup2e"]
+
+[ext_resource type="Shader" uid="uid://dyrymxeupondo" path="res://shaders/flying_bomb_enemy_visuals.tres" id="1_7j51h"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7j51h")
+shader_parameter/color = Color(4, 4, 4, 1)
+shader_parameter/color_change_speed = 0.0
