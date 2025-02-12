@@ -96,7 +96,7 @@ func _physics_process(delta: float) -> void:
 	if state == States.FALLING:
 		if is_on_floor():
 			set_state(States.IDLE)
-	
+
 	if velocity.length() == 0 and state != States.HEALING:
 		if state not in [States.FLYING_IDLE, States.FLYING]:
 			set_state(States.IDLE)
