@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqxk2kvtkyw8j"]
+[gd_scene load_steps=4 format=3 uid="uid://bqxk2kvtkyw8j"]
 
 [ext_resource type="PackedScene" uid="uid://d12xrdnbms7s3" path="res://models/flying_bomb_enemy_visuals.blend" id="1_4pykx"]
 [ext_resource type="Material" uid="uid://c468a67pgup2e" path="res://materials/flying_bomb_enemy_visuals.tres" id="2_hrsch"]
+[ext_resource type="Script" path="res://scripts/flying_bomb_enemy_visuals.gd" id="2_w5bw4"]
 
 [node name="flying_bomb_enemy" instance=ExtResource("1_4pykx")]
+script = ExtResource("2_w5bw4")
 
 [node name="Sphere" parent="." index="0"]
 material_overlay = ExtResource("2_hrsch")

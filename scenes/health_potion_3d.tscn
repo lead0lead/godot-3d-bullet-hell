@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo57o1661gcpw"]
+[gd_scene load_steps=4 format=3 uid="uid://bo57o1661gcpw"]
 
 [ext_resource type="PackedScene" uid="uid://bw1ps84wihmy4" path="res://models/health_potion.blend" id="1_nf5ub"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fwp1"]
+albedo_color = Color(2, 0, 0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmv5q"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.2)
 
 [node name="health_potion" instance=ExtResource("1_nf5ub")]
+
+[node name="potion" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4fwp1")
 
 [node name="Bottle" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_nmv5q")

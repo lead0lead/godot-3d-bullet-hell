@@ -10,12 +10,11 @@ extends Node3D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func play_healing_effect():
 	var e = healing_effect.instantiate()
-	get_parent().add_child(e)
-	e.global_position = get_parent().global_position
+	add_child(e)
+	#e.global_position = get_parent().global_position

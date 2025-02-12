@@ -156,7 +156,8 @@ func _physics_process(delta: float) -> void:
 	if state not in [
 			States.BOOSTING
 			, States.DASHING
-			, States.JUMPING]:
+			, States.JUMPING
+			, States.HEALING]:
 		if Input.is_action_just_pressed("Heal") and current_health_potions > 0:
 			set_state(States.HEALING)
 
