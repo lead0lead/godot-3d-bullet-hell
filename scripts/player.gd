@@ -362,6 +362,9 @@ func use_health_potion():
 	current_health_potions -= 1
 	player_ui.health_bar.health = health
 	player_ui.health_potion.update_label(current_health_potions)
+	if health > critical_health_amount:
+		low_health_indicator.visible = false
+	else: low_health_indicator.visible = true
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
