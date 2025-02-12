@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var player = get_parent()
 @onready var health_bar = $HealthBar
 @onready var stamina_bar = $StaminaBar
+@onready var health_potion = $Inventory/HealthPotion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

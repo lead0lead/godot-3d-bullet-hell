@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch4s2egsqt0g2"]
+[gd_scene load_steps=3 format=3 uid="uid://ch4s2egsqt0g2"]
 
 [ext_resource type="Texture2D" uid="uid://c8a7gjs7nomey" path="res://textures/health_potion_texture.png" id="1_cm0wc"]
+[ext_resource type="Script" path="res://scripts/health_potion.gd" id="1_vrjmc"]
 
 [node name="HealthPotion" type="Control"]
 custom_minimum_size = Vector2(64, 64)
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
+script = ExtResource("1_vrjmc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 32)

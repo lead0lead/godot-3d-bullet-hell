@@ -26,6 +26,7 @@ class_name Player
 @export var max_stamina := 100.0
 @export var stamina_regen_amount := 10.0
 @export var critical_health_amount := 25.0
+@export var health_potion_healing := 40
 
 @export var dash_stamina_consumption := 30.0
 @export var boost_stamina_consumption := 25.0
@@ -42,7 +43,7 @@ class_name Player
 @onready var boost_fov := starting_fov + 5.0
 
 
-enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING}
+enum States {IDLE, WALKING, JUMPING, GLIDING, BOOSTING, DASHING, FLYING_IDLE, FLYING, FALLING, HEALING}
 var state := States.IDLE
 var previous_state := state
 
@@ -62,8 +63,14 @@ var stamina := max_stamina
 
 const JUMP_TIMING := 0.0
 const JUMP_TRANSITION_TIMING := 0.0
+const HEAL_TRANSITION_TIMING := 1.3
 
 var can_dash: bool = true
+
+var current_health_potions := 3
+
+func _ready() -> void:
+	player_ui.health_potion.update_label(current_health_potions)
 
 func _physics_process(delta: float) -> void:
 	
@@ -88,13 +95,19 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			set_state(States.IDLE)
 	
-	if velocity.length() == 0:
+	if velocity.length() == 0 and state != States.HEALING:
 		if state not in [States.FLYING_IDLE, States.FLYING]:
 			set_state(States.IDLE)
 		else:
 			set_state(States.FLYING_IDLE)
 
-	if not is_on_floor() and state not in [States.JUMPING, States.BOOSTING, States.DASHING, States.FLYING_IDLE, States.FLYING]:
+	if not is_on_floor() and state not in [
+			States.JUMPING
+			, States.BOOSTING
+			, States.DASHING
+			, States.FLYING_IDLE
+			, States.FLYING
+			, States.HEALING]:
 		set_state(States.FALLING)
 
 	if state == States.GLIDING:
@@ -107,14 +120,16 @@ func _physics_process(delta: float) -> void:
 	if state == States.FLYING_IDLE and player_input_direction != Vector2.ZERO:
 		set_state(States.FLYING)
 
-	if is_on_floor() and state in [States.IDLE, States.WALKING]:
+	if is_on_floor() and state in [
+			States.IDLE
+			, States.WALKING]:
 		if Input.is_action_just_pressed("jump"):
 			set_state(States.JUMPING)
 
 	if state == States.FALLING and Input.is_action_pressed("jump"):
 		set_state(States.GLIDING)
 		
-	if Input.is_action_pressed("boost") and stamina > 5.0:
+	if Input.is_action_pressed("boost") and stamina > 5.0 and state != States.HEALING:
 		set_state(States.BOOSTING)
 		
 	if state == States.BOOSTING:
@@ -134,14 +149,30 @@ func _physics_process(delta: float) -> void:
 
 		if Input.is_action_just_released("boost"):
 			set_state(previous_state)
-	
-	if (state not in [States.BOOSTING, States.DASHING] 
+
+
+	if state not in [
+			States.BOOSTING
+			, States.DASHING
+			, States.JUMPING]:
+		if Input.is_action_just_pressed("Heal") and current_health_potions > 0:
+			set_state(States.HEALING)
+
+
+	if state == States.HEALING:
+		if works_longer_than(HEAL_TRANSITION_TIMING):
+			use_health_potion()
+			set_state(previous_state)
+
+
+	if (state not in [
+		States.BOOSTING, States.DASHING, States.HEALING] 
 			and Input.is_action_just_pressed("dash") 
 			and stamina > dash_stamina_consumption
 			and can_dash):
 		set_state(States.DASHING)
 
-	if state not in [States.BOOSTING]:
+	if state not in [States.BOOSTING, States.HEALING]:
 		if Input.is_action_just_pressed("toggle-flight"):
 			if state in [States.FLYING_IDLE, States.FLYING]:
 				set_state(States.FALLING)
@@ -210,10 +241,10 @@ func set_state(new_state: int) -> void:
 		speedlines.visible = false
 		_camera.fov = starting_fov
 		
-	if previous_state in [States.GLIDING, States.BOOSTING, States.FLYING_IDLE, States.FLYING]:
+	if previous_state in [States.GLIDING, States.BOOSTING, States.FLYING_IDLE, States.FLYING, States.HEALING]:
 		applied_gravity = gravity
 
-	if previous_state in [States.FLYING_IDLE, States.FLYING, States.BOOSTING]:
+	if previous_state in [States.FLYING_IDLE, States.FLYING, States.BOOSTING, States.HEALING]:
 		applied_movement_speed = movement_speed
 		applied_acceleration = acceleration
 		#_skin.mount.visible = false
@@ -247,6 +278,18 @@ func set_state(new_state: int) -> void:
 		speedlines.visible = true
 		_camera.fov = boost_fov
 		
+
+	if new_state in [States.HEALING]:
+		applied_gravity = 0.0
+		applied_movement_speed = 0.0
+		_skin.animation_player.play("Drinking")
+		_skin.health_potion.visible = true
+		if previous_state in [States.FLYING_IDLE, States.FLYING]:
+			_skin.mount.position = Vector3(0.0, 0.0, 0.0)
+			_skin.mount.rotation = Vector3(0.0, -180.0, 0.0)
+
+	if previous_state in [States.HEALING]:
+		_skin.health_potion.visible = false
 
 	if new_state in [States.WALKING]:
 		_skin.animation_player.play("Running")
@@ -311,6 +354,14 @@ func restore_stamina(delta):
 	
 	player_ui.stamina_bar.health = stamina
 
+func use_health_potion():
+	health += health_potion_healing
+	if health > max_health:
+		health = max_health
+	
+	current_health_potions -= 1
+	player_ui.health_bar.health = health
+	player_ui.health_potion.update_label(current_health_potions)
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
