@@ -8874,7 +8874,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_o08mk")
 surface_material_override/1 = SubResource("StandardMaterial3D_1x4gd")
 
 [node name="HandAttachment" type="BoneAttachment3D" parent="Bip001/Skeleton3D" index="1"]
-transform = Transform3D(0.788378, -0.593219, 0.162932, -0.0569526, -0.334101, -0.940802, 0.612544, 0.732437, -0.297193, 8.03071, 8.91039, -1.42366)
+transform = Transform3D(0.788379, -0.59322, 0.162932, -0.0569524, -0.3341, -0.940803, 0.612544, 0.732438, -0.297192, 8.0307, 8.91039, -1.42365)
 bone_name = "Bip001 L Hand"
 bone_idx = 7
 

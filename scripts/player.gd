@@ -27,6 +27,7 @@ class_name Player
 @export var stamina_regen_amount := 10.0
 @export var critical_health_amount := 25.0
 @export var health_potion_healing := 40
+@export var starting_health_potions := 6
 
 @export var dash_stamina_consumption := 30.0
 @export var boost_stamina_consumption := 25.0
@@ -70,6 +71,7 @@ var can_dash: bool = true
 var current_health_potions := 3
 
 func _ready() -> void:
+	current_health_potions = starting_health_potions
 	player_ui.health_potion.update_label(current_health_potions)
 
 func _physics_process(delta: float) -> void:
@@ -287,6 +289,7 @@ func set_state(new_state: int) -> void:
 		if previous_state in [States.FLYING_IDLE, States.FLYING]:
 			_skin.mount.position = Vector3(0.0, 0.0, 0.0)
 			_skin.mount.rotation = Vector3(0.0, -180.0, 0.0)
+		_skin.play_healing_effect()
 
 	if previous_state in [States.HEALING]:
 		_skin.health_potion.visible = false
