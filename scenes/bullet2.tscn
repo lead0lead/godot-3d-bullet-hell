@@ -13,8 +13,6 @@ radius = 0.75
 render_priority = 0
 shader = ExtResource("4_dk7ge")
 shader_parameter/HeaderColor = Color(4, 2, 0.5, 1)
-shader_parameter/invert_fresnel = false
-shader_parameter/fresnel_power = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_x2544"]
 
@@ -94,6 +92,8 @@ shape = SubResource("SphereShape3D_pucci")
 [node name="MagicProjectileMesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_uxlu1")
 cast_shadow = 0
+instance_shader_parameters/fresnel_power = 7.0
+instance_shader_parameters/invert_fresnel = false
 mesh = SubResource("SphereMesh_x2544")
 
 [node name="MagicProjectileHeaderInsideMesh" type="MeshInstance3D" parent="."]

@@ -8,18 +8,23 @@ default_input_values = [2, true, 3, 4.0]
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_h60sc"]
 parameter_name = "fresnel_power"
+qualifier = 2
+default_value_enabled = true
+default_value = 2.0
 
 [sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_1edwu"]
 parameter_name = "invert_fresnel"
+qualifier = 2
 default_value_enabled = true
+default_value = true
 
 [resource]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled, fog_disabled;
 
 uniform vec4 HeaderColor : source_color;
-uniform bool invert_fresnel = false;
-uniform float fresnel_power;
+instance uniform bool invert_fresnel = true;
+instance uniform float fresnel_power = 2;
 
 
 
@@ -47,6 +52,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-611.408, 114.238)
 flags/unshaded = true
 flags/shadows_disabled = true
 flags/ambient_light_disabled = true

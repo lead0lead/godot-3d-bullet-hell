@@ -5,7 +5,9 @@ enum States {STATIONARY, ATTACKING}
 var state := States.STATIONARY
 var previous_state := state
 
-@onready var bullet = preload("res://scenes/bullet.tscn")
+@export var bullet_speed := 3.0
+
+@onready var bullet = preload("res://scenes/enemy_bullet.tscn")
 
 func _ready() -> void:
 	health_bar.init_health(health)
@@ -33,7 +35,7 @@ func fire():
 	if can_fire:
 		can_fire = false
 		var b = bullet.instantiate()
-		b.speed = 1.2
+		b.speed = bullet_speed
 		b.target_group = "Player"
 		gun.add_child(b)
 		b.shoot = true

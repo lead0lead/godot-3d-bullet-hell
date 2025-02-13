@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://q8wcha5oqbt"]
+[gd_scene load_steps=10 format=3 uid="uid://q8wcha5oqbt"]
 
 [ext_resource type="Script" path="res://scripts/stationary_enemy.gd" id="1_banow"]
+[ext_resource type="PackedScene" uid="uid://cc2jb2qy52jd" path="res://scenes/flying_shooter_enemy_visuals.tscn" id="2_608u6"]
 [ext_resource type="PackedScene" uid="uid://2c1n04ol44j8" path="res://scenes/health_bar.tscn" id="2_gkkg3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkp2u"]
+radius = 0.75
+height = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kitba"]
-albedo_color = Color(0.909218, 0, 0.134994, 1)
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_l04gq"]
 material = SubResource("StandardMaterial3D_kitba")
@@ -23,11 +26,13 @@ height = 0.3
 viewport_path = NodePath("HealthBarViewport")
 
 [node name="StationaryEnemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 16
+collision_mask = 3
 script = ExtResource("1_banow")
 rate_of_fire = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CapsuleShape3D_hkp2u")
 
 [node name="TestMesh" type="MeshInstance3D" parent="."]
@@ -36,10 +41,12 @@ mesh = SubResource("CapsuleMesh_l04gq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestMesh"]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.2, 0.5, 0.509)
+visible = false
 mesh = SubResource("CapsuleMesh_whfq5")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="TestMesh"]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.2, 0.5, 0.509)
+visible = false
 mesh = SubResource("CapsuleMesh_whfq5")
 
 [node name="LockOnTarget" type="Node3D" parent="."]
@@ -50,7 +57,10 @@ target_position = Vector3(0, 0, -40)
 collision_mask = 3
 
 [node name="Gun" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48857, 0)
+
+[node name="flying_shooter_enemy" parent="Gun" instance=ExtResource("2_608u6")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="HealthBarViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -72,6 +82,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="HealthBarVisuals" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22306, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.21818, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_j7uh6")

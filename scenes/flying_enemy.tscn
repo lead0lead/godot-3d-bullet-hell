@@ -100,6 +100,7 @@ billboard = 1
 texture = SubResource("ViewportTexture_rv8ka")
 
 [node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 0.75
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 16
