@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://sdqcmwovfbk2"]
+
+[ext_resource type="Shader" uid="uid://dcx66n2kcxj2b" path="res://shaders/explosion.tres" id="1_2xehj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xft4q"]
+render_priority = 0
+shader = ExtResource("1_2xehj")
+shader_parameter/displacement = 0.1
+shader_parameter/base_color = Color(0.359069, 0.359069, 0.359069, 1)
+shader_parameter/alpha_strength = 0.6
+shader_parameter/emission_color = Color(1, 0.25098, 0, 1)
+shader_parameter/emission_strength = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_tbgqs"]
+
+[node name="Explosion" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_xft4q")
+mesh = SubResource("SphereMesh_tbgqs")

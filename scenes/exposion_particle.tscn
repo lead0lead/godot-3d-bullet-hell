@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpjsjbnfahs0o"]
+
+[ext_resource type="Shader" uid="uid://dcx66n2kcxj2b" path="res://shaders/explosion.tres" id="1_8ajb7"]
+[ext_resource type="Script" path="res://scripts/exposion_particle.gd" id="1_xmagt"]
+
+[sub_resource type="Gradient" id="Gradient_ayb87"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_grqxw"]
+gradient = SubResource("Gradient_ayb87")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xh435"]
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 2, 0)
+damping_min = 3.0
+damping_max = 3.0
+color_ramp = SubResource("GradientTexture1D_grqxw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prjf8"]
+render_priority = 0
+shader = ExtResource("1_8ajb7")
+shader_parameter/displacement = 0.1
+shader_parameter/base_color = Color(0.366595, 0.366595, 0.366595, 1)
+shader_parameter/emission_color = Color(1, 0.333333, 0, 1)
+shader_parameter/Emission_Strength = 20.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_iyg1b"]
+material = SubResource("ShaderMaterial_prjf8")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vgbi"]
+albedo_color = Color(1, 0.698994, 0.552493, 1)
+emission_enabled = true
+emission = Color(0.992157, 0.176471, 0.0705882, 1)
+emission_energy_multiplier = 19.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_bue4s"]
+radius = 3.0
+height = 6.0
+
+[node name="ExposionParticle" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_xmagt")
+
+[node name="ExplosionParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xh435")
+draw_pass_1 = SubResource("SphereMesh_iyg1b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_3vgbi")
+mesh = SubResource("SphereMesh_bue4s")
+skeleton = NodePath("../ExplosionParticles")
+
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_gpu_particles_3d_finished"]

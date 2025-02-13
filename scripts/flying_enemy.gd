@@ -22,6 +22,7 @@ var player_in_explosion_range: bool = false
 @onready var roaming_pos_ray := $RoamingPosRay
 @onready var explosion_timer := $ExplosionTimer
 @onready var applied_move_speed := move_speed
+@onready var explosion := preload("res://scenes/exposion_particle.tscn")
 
 func _ready() -> void:
 	current_roaming_target_pos = find_roaming_position()
@@ -101,6 +102,11 @@ func find_roaming_position():
 
 
 func _on_explosion_timer_timeout() -> void:
+	var e = explosion.instantiate()
+	get_parent().add_child(e)
+	e.global_position = global_position
+	e.play_explosion()
+	
 	if player_in_explosion_range:
 		player.take_damage(explosion_damage)
 		print("hit by explosion")
