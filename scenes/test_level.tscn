@@ -1,0 +1,343 @@
+[gd_scene load_steps=7 format=3 uid="uid://c212jroqlqxcg"]
+
+[ext_resource type="Texture2D" uid="uid://by0v6thlpvcym" path="res://textures/texture_08.png" id="1_8rv1k"]
+[ext_resource type="Material" uid="uid://gg3nxexsi6x3" path="res://materials/prototype_material.tres" id="1_lqdp8"]
+[ext_resource type="Texture2D" uid="uid://bengxe7beww4v" path="res://textures/texture_08_dark.png" id="3_ggikj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai2fw"]
+albedo_texture = ExtResource("1_8rv1k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s15ec"]
+albedo_texture = ExtResource("3_ggikj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu5pv"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 64, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("1_lqdp8")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5, 0)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+size = Vector3(20, 21, 20)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5, 0)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+size = Vector3(20, 21, 20)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 3.38818, 0)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(33, 33.2236, 20)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, -3.72363, 0.5)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(86, 47.5, 115)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.5, 15.0264, 0.5)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(27, 85, 115)
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 35.0264, -56)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(94, 125, 2)
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 35.0264, 57)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(94, 125, 2)
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.5, 35.0264, 1)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 125, 114)
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 35.0264, 1)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 125, 114)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, -20.9346, 0)
+material_override = SubResource("StandardMaterial3D_s15ec")
+operation = 2
+size = Vector3(33, 10.8887, 20)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0423, -2.34194, -0.0137587)
+material_override = SubResource("StandardMaterial3D_s15ec")
+operation = 2
+size = Vector3(22, 48, 20)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5423, 33.5883, 12.9862)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.5423, 33.5883, -13.0138)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, -23.014)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, -33.014)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, -43.014)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, -53.014)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, -53.014)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 55.0182, 0.486)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 7, 115)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, 22.986)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, 32.986)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, 42.986)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.542, 33.588, 52.986)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(3, 47.8605, 6)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4555, 0)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+operation = 2
+size = Vector3(19, 21, 19)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7148, 10.4555, 0)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+operation = 2
+size = Vector3(12.4296, 21, 19)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4296, -7.54449, 0.5)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+operation = 2
+size = Vector3(7, 21, 8)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4296, -7.54449, 0.5)
+material_override = SubResource("StandardMaterial3D_ai2fw")
+operation = 2
+size = Vector3(7, 21, 8)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9, 5, 1)
+operation = 2
+polygon = PackedVector2Array(-4, 0, -3, 1, 1, 1, 2, 0)
+depth = 12.6
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2.5, 0)
+operation = 2
+size = Vector3(16, 5, 6)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 56, -21.4, 1)
+operation = 2
+polygon = PackedVector2Array(-4, 0, -3, 1, 1, 1, 2, 0)
+depth = 12.6
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5, -23.9, 0)
+operation = 2
+size = Vector3(16, 5, 6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.799, -22.7236, -3.5)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(1, 9, 13)
+
+[node name="CSGBox3D42" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.799, -24.2236, 0)
+material_override = SubResource("StandardMaterial3D_s15ec")
+size = Vector3(1, 6, 20)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 25.6, 0)
+operation = 2
+radius = 8.0
+height = 104.0
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.981, 50, 16.1025)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 35.93
+
+[node name="CSGPolygon3D4" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 20, 16)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 35.93
+
+[node name="CSGPolygon3D6" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 83, 30, 0)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 28.49
+
+[node name="CSGPolygon3D9" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, -18)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D17" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, -8)
+operation = 2
+polygon = PackedVector2Array(-18, 0, -17, 1, 1, 1, 2, 0, 2, -5, -18, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D10" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, -28)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D11" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, -38)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D12" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, -48)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D13" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, 18)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D14" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, 28)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D15" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, 38)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D16" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57, 55, 48)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 3.0
+
+[node name="CSGPolygon3D7" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1, 0, -4.37114e-08, 53.0024, 26.0154, -0.00524616)
+polygon = PackedVector2Array(-3, 0, -2, 1, 2, 1, 3, 0, 3, -6, -3, -6)
+
+[node name="CSGPolygon3D8" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1, 0, -4.37114e-08, 54.0061, 26.5217, -0.00596679)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -6, -2, -6)
+
+[node name="CSGPolygon3D5" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9968, 1.90735e-06, 15.9612)
+operation = 2
+polygon = PackedVector2Array(-2, 0, -1, 1, 1, 1, 2, 0, 2, -5, -2, -5)
+depth = 35.93
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 46, -50.5)
+size = Vector3(100, 4, 9)
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 46, 2.5)
+size = Vector3(8, 4, 112)
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 31.6914, 52.5)
+size = Vector3(8, 25, 8)
+
+[node name="CSGBox3D39" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.5, 42.691, 29.5)
+size = Vector3(8, 47, 8)
+
+[node name="CSGBox3D41" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.5, 42.691, 29.5)
+size = Vector3(8, 47, 8)
+
+[node name="CSGBox3D40" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 42.691, 29.5)
+size = Vector3(8, 47, 8)
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 31.691, 12.5)
+size = Vector3(8, 25, 8)
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 31.691, -27.5)
+size = Vector3(8, 25, 8)
+
+[node name="CSGBox3D37" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 32.191, -51.5)
+size = Vector3(8, 26, 8)
+
+[node name="CSGBox3D38" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5, 32.191, -51.5)
+size = Vector3(8, 26, 8)
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 68, 29.5)
+size = Vector3(100, 4, 9)
+
+[node name="Skybox" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 95, 1)
+material_override = SubResource("StandardMaterial3D_uu5pv")
+use_collision = true
+size = Vector3(100, 1, 120)

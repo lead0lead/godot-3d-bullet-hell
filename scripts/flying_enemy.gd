@@ -21,6 +21,7 @@ var previous_state := state
 @export var explosion_tick_increase := 25.0
 @export var explosion_damage := 40.0
 @export var bullet_speed := 2.0
+@export var starting_state := States.ROAMING
 
 var direction := Vector3.ZERO
 var roaming_distance := 10.0
@@ -39,7 +40,7 @@ var attack_range := explosion_range
 
 func _ready() -> void:
 	current_roaming_target_pos = find_roaming_position()
-	set_state(States.ROAMING)
+	set_state(starting_state)
 	roaming_pos_ray.target_position = Vector3(0, 0, roaming_distance)
 
 	health_bar.init_health(health)
@@ -116,7 +117,8 @@ func _physics_process(delta: float) -> void:
 		direction = global_position.direction_to(player.global_position)
 		applied_move_speed = exploding_speed
 
-	skin.look_at(global_position + direction)
+	if direction != Vector3.ZERO:
+		skin.look_at(global_position + direction)
 	velocity = velocity.move_toward(direction.normalized() * applied_move_speed, accel * delta)
 	move_and_slide()
 

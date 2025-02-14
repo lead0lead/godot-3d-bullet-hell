@@ -1,0 +1,156 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5w612kxs0t1v"]
+
+[ext_resource type="PackedScene" uid="uid://c212jroqlqxcg" path="res://scenes/test_level.tscn" id="1_4lh8t"]
+[ext_resource type="PackedScene" uid="uid://wtup6u4wgkew" path="res://scenes/player.tscn" id="2_lsl0b"]
+[ext_resource type="PackedScene" uid="uid://q8wcha5oqbt" path="res://scenes/stationary_enemy.tscn" id="3_sx3ye"]
+[ext_resource type="PackedScene" uid="uid://76jp3s7mq41v" path="res://scenes/flying_enemy.tscn" id="4_6hu8j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ynjm7"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_7ci37"]
+sky_material = SubResource("ProceduralSkyMaterial_ynjm7")
+
+[sub_resource type="Environment" id="Environment_3es2x"]
+background_mode = 2
+sky = SubResource("Sky_7ci37")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestLevelScene" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3es2x")
+
+[node name="TestLevel" parent="." instance=ExtResource("1_4lh8t")]
+
+[node name="Label3D" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9, 2, 0)
+text = "Use [W, A, S, D] to move
+Press [SPACE] to jump
+[Mouse] to look around
+"
+font_size = 64
+
+[node name="Label3D3" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 30, 2, 0)
+text = "Hold [SPACE] to glide
+"
+font_size = 64
+
+[node name="Label3D4" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, -24, -2)
+text = "Press [LEFT MOUSE BUTTON] to shoot.
+Press [Right Mouse Button] to dodge / dash"
+font_size = 64
+
+[node name="Label3D5" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 47, -24, -2)
+text = "Press [F] to toggle Flight Mode On/Off.
+In Flight Mode, you move slower.
+You can fly upwards by pressing [SPACE]
+and down by pressing [CTRL]"
+font_size = 64
+
+[node name="Label3D6" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 58, -24, 0)
+text = "You can use [SHIFT] for a quick Boost"
+font_size = 64
+
+[node name="Label3D2" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 2, 0)
+text = "Use [W, A, S, D] to move
+Press [SPACE] to jump
+[Mouse] to look around
+"
+font_size = 64
+
+[node name="Player" parent="." instance=ExtResource("2_lsl0b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34966, 0.0699174, -3.0222)
+
+[node name="StationaryEnemy" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.7634, -26, 8)
+
+[node name="StationaryEnemy2" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.0525, -25.9893, -7.45665)
+
+[node name="FlyingEnemy2" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -5, 15)
+starting_state = 0
+
+[node name="StationaryEnemy3" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 15, 9)
+
+[node name="StationaryEnemy4" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 15, -9)
+
+[node name="FlyingEnemy3" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77, 25, 0)
+starting_state = 0
+
+[node name="FlyingEnemy4" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 45, 13)
+type = 1
+starting_state = 0
+
+[node name="StationaryEnemy5" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 45, -10)
+
+[node name="FlyingEnemy" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9872, 60.5264, 54.3577)
+type = 1
+
+[node name="FlyingEnemy5" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9872, 60.5264, -51.6423)
+
+[node name="FlyingEnemy6" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.6245, 64.4323, -46.2796)
+
+[node name="StationaryEnemy6" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 58, 51)
+
+[node name="StationaryEnemy8" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 59, 53)
+
+[node name="StationaryEnemy7" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71, 70, 29)
+
+[node name="StationaryEnemy10" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 70, 31)
+
+[node name="StationaryEnemy11" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 70, 30)
+
+[node name="StationaryEnemy9" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 48, 53)
+
+[node name="StationaryEnemy12" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 48, -50)
+
+[node name="StationaryEnemy13" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 48, -49)
+
+[node name="StationaryEnemy14" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 20, 53)
+
+[node name="FlyingEnemy7" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 75, 19)
+
+[node name="FlyingEnemy8" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 75, -39)
+type = 1
+
+[node name="FlyingEnemy9" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 75, -39)
+type = 1
+
+[node name="FlyingEnemy10" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 75, -51)
+
+[node name="FlyingEnemy11" parent="." instance=ExtResource("4_6hu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 71, 26)
+type = 1
+
+[node name="StationaryEnemy15" parent="." instance=ExtResource("3_sx3ye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 26, 0)
