@@ -81,8 +81,8 @@ func _physics_process(delta: float) -> void:
 
 		if global_position.distance_to(player.global_position) < shooting_min_range:
 			applied_move_speed = 0.0
-		
-		
+
+
 		if global_position.distance_to(player.global_position) > shooting_max_range:
 			set_state(States.PERSUING)
 
@@ -128,7 +128,7 @@ func set_state(new_state: int) -> void:
 	if new_state == States.ROAMING:
 		applied_move_speed = roam_speed
 		current_roaming_target_pos = find_roaming_position()
-	
+
 	if new_state == States.EXPLODING:
 		explosion_timer.start()
 
@@ -140,7 +140,7 @@ func find_roaming_position():
 	var random_angle = randf_range(0, TAU)
 	var offset = Vector3(cos(random_angle), 0, sin(random_angle)) * roaming_distance
 	var potential_target = global_transform.origin + offset
-	
+
 	roaming_pos_ray.look_at(potential_target, Vector3.UP)
 	if not roaming_pos_ray.is_colliding():
 		return potential_target

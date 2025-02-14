@@ -11,6 +11,9 @@ extends CanvasLayer
 @onready var stamina_bar = $StaminaBar
 @onready var health_potion = $Inventory/HealthPotion
 
+@onready var onscreen_message = preload("res://scenes/onscreen_message.tscn")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_update_crosshair()
@@ -35,3 +38,9 @@ func _update_crosshair():
 func update_target_marker(target):
 	target_marker.position = _camera.unproject_position(
 		target.lock_on_target.global_position)
+
+func display_onscreen_message(message, type):
+	var m = onscreen_message.instantiate()
+	m.set_text(message)
+	m.set_type(type)
+	add_child(m)

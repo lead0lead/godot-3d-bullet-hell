@@ -112,6 +112,8 @@ script = ExtResource("1_yjuw3")
 _skin = NodePath("witch_anims_true")
 _ranged_weapon = NodePath("RangedWeaponPivot/SpringArm3D/RangedWeapon")
 lock_on_target = NodePath("LockOnTarget")
+starting_health_potions = 3
+boost_stamina_consumption = 30.0
 
 [node name="witch_anims_true" parent="." instance=ExtResource("2_wc67i")]
 transform = Transform3D(-0.65, 0, -5.68248e-08, 0, 0.65, 0, 5.68248e-08, 0, -0.65, 0, 0, 0)

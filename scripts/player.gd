@@ -29,7 +29,7 @@ class_name Player
 @export var health_potion_healing := 40
 @export var starting_health_potions := 6
 
-@export var dash_stamina_consumption := 30.0
+@export var dash_stamina_consumption := 25.0
 @export var boost_stamina_consumption := 25.0
 @export var min_stamina_for_boost := 5.0
 
@@ -86,7 +86,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("fire"):
 		_ranged_weapon.fire()
-		
+			# Out of stamina message
+	
 	#if Input.is_action_just_pressed("heavy-fire"):
 		#_ranged_weapon.heavy_fire()
 	#
@@ -158,8 +159,12 @@ func _physics_process(delta: float) -> void:
 			, States.DASHING
 			, States.JUMPING
 			, States.HEALING]:
-		if Input.is_action_just_pressed("Heal") and current_health_potions > 0:
-			set_state(States.HEALING)
+		if Input.is_action_just_pressed("Heal"):
+			if current_health_potions > 0:
+				set_state(States.HEALING)
+			else:
+				player_ui.display_onscreen_message("Out of Healthpotions"
+				, "negative")
 
 
 	if state == States.HEALING:
