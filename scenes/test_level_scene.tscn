@@ -40,9 +40,10 @@ text = "Hold [SPACE] to glide
 font_size = 64
 
 [node name="Label3D4" type="Label3D" parent="TestLevel"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, -24, -2)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38.0036, -23.998, -1.99705)
 text = "Press [LEFT MOUSE BUTTON] to shoot.
-Press [Right Mouse Button] to dodge / dash"
+Press [Right Mouse Button] to dodge / dash
+ (consumes stamina)"
 font_size = 64
 
 [node name="Label3D5" type="Label3D" parent="TestLevel"]
@@ -54,8 +55,43 @@ and down by pressing [CTRL]"
 font_size = 64
 
 [node name="Label3D6" type="Label3D" parent="TestLevel"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 58, -24, 0)
-text = "You can use [SHIFT] for a quick Boost"
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 51.8112, -24, 12)
+text = "Hold [SHIFT] to boost
+forward at a high speed
+(consumes stamina)"
+font_size = 64
+
+[node name="Label3D7" type="Label3D" parent="TestLevel"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 65.8112, -24, 12)
+text = "Press [E] to use a Healthpotion."
+font_size = 64
+
+[node name="Label3D8" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 74.8112, 60, 0)
+text = "You finished the tutorial. 
+You can now play around with 
+mechanics in this sandbox area."
+font_size = 64
+
+[node name="Label3D9" type="Label3D" parent="TestLevel"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 57.8112, 60, 0)
+text = "You finished the tutorial. 
+You can now play around with 
+mechanics in this sandbox area."
+font_size = 64
+
+[node name="Label3D10" type="Label3D" parent="TestLevel"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 65.8112, 60, 9)
+text = "You finished the tutorial. 
+You can now play around with 
+mechanics in this sandbox area."
+font_size = 64
+
+[node name="Label3D11" type="Label3D" parent="TestLevel"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 65.8112, 60, -9)
+text = "You finished the tutorial. 
+You can now play around with 
+mechanics in this sandbox area."
 font_size = 64
 
 [node name="Label3D2" type="Label3D" parent="TestLevel"]

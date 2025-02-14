@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	_handle_camera_rotation(delta)
 
 func _handle_camera_rotation(delta):
-	_camera_pivot.rotation.x += _camera_input_direction.y
+	_camera_pivot.rotation.x += -_camera_input_direction.y
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, 
 		-PI / 2.0, PI / 2.0)
 	_camera_pivot.rotation.y -= _camera_input_direction.x

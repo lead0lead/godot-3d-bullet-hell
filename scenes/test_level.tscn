@@ -176,16 +176,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 2.5, 0)
 operation = 2
 size = Vector3(16, 5, 6)
 
-[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 56, -21.4, 1)
+[node name="CSGPolygon3D18" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.9855, -21.4, 19.0233)
 operation = 2
 polygon = PackedVector2Array(-4, 0, -3, 1, 1, 1, 2, 0)
 depth = 12.6
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5, -23.9, 0)
+[node name="CSGPolygon3D19" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.5287, -21.4, 19.0233)
+operation = 2
+polygon = PackedVector2Array(-4, 0, -3, 1, 1, 1, 2, 0)
+depth = 12.6
+
+[node name="CSGBox3D43" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 52.033, -23.9, 10.0233)
 operation = 2
 size = Vector3(16, 5, 6)
+
+[node name="CSGBox3D45" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 65.533, -23.9, 10.023)
+operation = 2
+size = Vector3(16, 5, 6)
+
+[node name="CSGBox3D44" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 60.2198, -21.9, 18.4223)
+operation = 2
+size = Vector3(8.324, 9, 22.3736)
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.799, -22.7236, -3.5)
